@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
+import java.util.List;
+
 
 @Controller
 public class HomeController {
@@ -18,7 +20,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String homeAction(Model model){
-        Iterable<Institution> allInstitutions = institutionRepository.findDistinctFirst4();
+        List<Institution> allInstitutions = institutionRepository.findDistinctFirst4ByOrderByIdDesc();
         model.addAttribute("institutions", allInstitutions);
         return "index";
     }

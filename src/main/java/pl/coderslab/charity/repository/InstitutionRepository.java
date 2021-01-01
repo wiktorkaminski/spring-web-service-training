@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface InstitutionRepository extends CrudRepository<Institution, Long> {
-    List<Institution> findDistinctFirst4();
+    List<Institution> findDistinctFirst4ByOrderByIdDesc();
 }
