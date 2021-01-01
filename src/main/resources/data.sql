@@ -1,0 +1,4 @@
+INSERT INTO institutions (id, description, name) VALUES (1, 'Pomagamy dzieciom potrzebującym opieki hipoterapeutycznej.', 'Fundacja "Konik Polski"');
+INSERT INTO institutions (id, description, name) VALUES (2, 'Cel i misja: Pomoc w wybudzaniu dzieci ze śpiączki.', 'OPP "Świeca w mroku"');
+INSERT INTO institutions (id, description, name) VALUES (3, 'Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji życiowej.', 'Fundacja “Dla dzieci"');
+INSERT INTO institutions (id, description, name) VALUES (4, 'Nasza misja: Pomoc dla osób nie posiadających miejsca zamieszkania.', 'Fundacja “Bez domu”');
