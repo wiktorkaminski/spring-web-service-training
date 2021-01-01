@@ -4,6 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.charity.entity.Institution;
 
+import java.util.List;
+
 @Repository
 public interface InstitutionRepository extends CrudRepository<Institution, Long> {
+    List<Institution> findDistinctFirst4();
 }
