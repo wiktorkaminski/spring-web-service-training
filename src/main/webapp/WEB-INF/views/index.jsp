@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <%@include file="/WEB-INF/jspf/head.jspf" %>
+    <%@include file="/WEB-INF/jspf/head.jspf"%>
 </head>
 <body>
 <header class="header--main-page">

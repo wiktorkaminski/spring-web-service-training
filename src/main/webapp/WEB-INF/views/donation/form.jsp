@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form:form modelAttribute="donation">
+<form:form modelAttribute="donation" method="POST">
     <form:checkboxes path="categories"
                      items="${categories}" itemLabel="name" itemValue="id"/>
     <form:radiobuttons path="institution.id" items="${institutions}" itemLabel="name" itemValue="id"/>
@@ -16,6 +16,7 @@
     <form:textarea path="pickUpComment"/>
     <form:input type="date" path="pickUpDate"/>
     <form:input type="time" path="pickUpTime"/>
+    <input type="submit" value="zapisz">
 </form:form>
 </body>
 </html>
