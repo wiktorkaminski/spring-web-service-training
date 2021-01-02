@@ -89,15 +89,16 @@
                 <c:forEach items="${categories}" var="category">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:checkbox
-                                    path="categories"
-                                    value="${category.id}"
-                            />
+                            <input type="checkbox" name="categories" value="<c:out value="${category.id}"/>"/>
                             <span class="checkbox"></span>
-                            <span class="description">${category.name}</span>
+                            <span class="description"><c:out value="${category.name}"/></span>
                         </label>
                     </div>
                 </c:forEach>
+
+                <div class="form-group form-group--buttons">
+                    <button type="button" class="btn next-step">Dalej</button>
+                </div>
             </div>
 
             <!-- STEP 2 -->
@@ -269,7 +270,7 @@
     <%@include file="/WEB-INF/jspf/footer-bottom-line-div.jspf" %>
 </footer>
 
-<script src="js/app.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/app.js"></script>
 </body>
 </html>
 
