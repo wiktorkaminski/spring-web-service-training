@@ -1,5 +1,9 @@
 package pl.coderslab.charity.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
@@ -9,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "donations")
+@Getter @Setter
 public class Donation {
 
     @Id
@@ -31,6 +36,7 @@ public class Donation {
     @Column(length = 6)
     String zipCode;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate pickUpDate;
 
     LocalTime pickUpTime;
