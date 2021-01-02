@@ -10,7 +10,14 @@ public interface DonationRepository extends CrudRepository<Donation, Long> {
 
     @Query(
             value = "SELECT SUM(quantity) FROM donations;",
-            nativeQuery = true)
+            nativeQuery = true
+    )
     Long countAllDonatedBags();
+
+    @Query(
+            value = "SELECT COUNT(*) FROM donations;",
+            nativeQuery = true
+    )
+    Long countAllDonations();
 
 }
