@@ -27,4 +27,9 @@ public class RegistrationService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
+
+    public void clearEmailAndPasswordField(User user) {
+        user.setPassword(null);
+        user.setEmail(null);
+    }
 }

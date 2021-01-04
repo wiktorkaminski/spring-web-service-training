@@ -27,7 +27,9 @@ public class RegistrationController {
         registrationService.trimFields(user);
 
         if (registrationService.checkIfUserExists(user)) {
-            model.addAttribute("userExistsMessage", "E-mail zajęty");
+            registrationService.clearEmailAndPasswordField(user);
+            model.addAttribute("userExistsFlag", "true");
+            model.addAttribute("user", user);
             return "register/form";
         }
         registrationService.saveUser(user);

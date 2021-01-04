@@ -33,14 +33,16 @@
         <div class="form-group">
             <form:input type="text" path="lastName" placeholder="Nazwisko" />
         </div>
-        <c:if test="${not empty userExistsMessage}">
-            <p class=form-email-err>
-                E-mail jest już zajęty!
-            </p>
+        <c:if test="${empty userExistsFlag}">
+            <div class="form-group">
+                <form:input type="email" path="email" placeholder="Email" />
+            </div>
         </c:if>
-        <div class="form-group">
-            <form:input type="email" path="email" placeholder="Email" />
-        </div>
+        <c:if test="${not empty userExistsFlag}">
+            <div class="form-group form-group-red">
+                <form:input type="email" path="email" placeholder="Email jest już zajęty!" />
+            </div>
+        </c:if>
         <div class="form-group">
             <form:input type="password" path="password" placeholder="Hasło" />
         </div>
