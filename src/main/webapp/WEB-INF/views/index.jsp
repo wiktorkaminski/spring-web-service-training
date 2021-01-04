@@ -9,6 +9,7 @@
 </head>
 <body>
 <header class="header--main-page">
+
     <%@include file="/WEB-INF/jspf/nav-top.jspf"%>
 
     <div class="slogan container container--90">
