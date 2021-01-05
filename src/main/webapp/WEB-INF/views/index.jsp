@@ -10,7 +10,7 @@
 <body>
 <header class="header--main-page">
 
-    <%@include file="/WEB-INF/jspf/nav-top.jspf"%>
+    <%@include file="/WEB-INF/jspf/nav-top.jspf" %>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -86,31 +86,37 @@
     <h2>Komu pomagamy?</h2>
 
     <!-- SLIDE 1 -->
-    <div class="help--slides active" data-id="1">
-        <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
-            Możesz sprawdzić czym się zajmują.</p>
+    <c:forEach items="${institutions}" step="4" varStatus="outerLoopStatus">
+        <div
+                <c:if test="${outerLoopStatus.first}">class="help--slides active"</c:if>
+                <c:if test="${not outerLoopStatus.first}">class="help--slides"</c:if>
+                data-id="${outerLoopStatus.count}">
 
+            <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
+                Możesz sprawdzić czym się zajmują.</p>
 
-        <ul class="help--slides-items">
-            <li>
-                <c:forEach items="${institutions}" var="institution" begin="0" end="1">
-                    <div class="col">
-                        <div class="title"><c:out value="${institution.name}"/></div>
-                        <div class="subtitle"><c:out value="${institution.description}"/></div>
-                    </div>
-                </c:forEach>
+            <ul class="help--slides-items">
+                <li>
+                    <c:forEach items="${institutions}" var="institution" begin="${outerLoopStatus.index}" end="${outerLoopStatus.index + 1}">
+                        <div class="col">
+                            <div class="title"><c:out value="${institution.name}"/></div>
+                            <div class="subtitle"><c:out value="${institution.description}"/></div>
+                        </div>
+                    </c:forEach>
 
-            </li>
-            <li>
-                <c:forEach items="${institutions}" var="institution" begin="2" end="3">
-                    <div class="col">
-                        <div class="title"><c:out value="${institution.name}"/></div>
-                        <div class="subtitle"><c:out value="${institution.description}"/></div>
-                    </div>
-                </c:forEach>
-            </li>
-        </ul>
-    </div>
+                </li>
+                <li>
+                    <c:forEach items="${institutions}" var="institution" begin="${outerLoopStatus.index + 2}" end="${outerLoopStatus.index + 3}">
+                        <div class="col">
+                            <div class="title"><c:out value="${institution.name}"/></div>
+                            <div class="subtitle"><c:out value="${institution.description}"/></div>
+                        </div>
+                    </c:forEach>
+                </li>
+            </ul>
+        </div>
+    </c:forEach>
+
 
 </section>
 
