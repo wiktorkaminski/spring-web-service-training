@@ -29,7 +29,7 @@ public class HomeController {
         Long donatedBags = donationRepository.countAllDonatedBags();
         model.addAttribute("donatedBags", donatedBags);
 
-        Long countedDonations = donationRepository.countAllDonations();
+        Long countedDonations = donationRepository.count();
         model.addAttribute("countedDonations", countedDonations);
         return "index";
     }
