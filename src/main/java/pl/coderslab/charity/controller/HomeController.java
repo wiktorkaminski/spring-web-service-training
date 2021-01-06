@@ -23,7 +23,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String homeAction(Model model){
-        List<Institution> allInstitutions = institutionRepository.findDistinctFirst4ByOrderByIdDesc();
+        Iterable<Institution> allInstitutions = institutionRepository.findAll();
         model.addAttribute("institutions", allInstitutions);
 
         Long donatedBags = donationRepository.countAllDonatedBags();
