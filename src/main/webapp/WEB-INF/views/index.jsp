@@ -87,10 +87,7 @@
 
     <!-- SLIDE 1 -->
     <c:forEach items="${institutions}" step="4" varStatus="outerLoopStatus">
-        <div
-                <c:if test="${outerLoopStatus.first}">class="help--slides active"</c:if>
-                <c:if test="${not outerLoopStatus.first}">class="help--slides"</c:if>
-                data-id="${outerLoopStatus.count}">
+        <div class="help--slides" data-id="${outerLoopStatus.count}">
 
             <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
                 Możesz sprawdzić czym się zajmują.</p>
@@ -114,10 +111,13 @@
                     </c:forEach>
                 </li>
             </ul>
+
         </div>
     </c:forEach>
-
-
+    <div class="help--slides-pagination">
+        <button type="button" class="btn prev-step">&#x3C;</button>
+        <button type="button" class="btn next-step">&#x3E;</button>
+    </div>
 </section>
 
 <footer>
