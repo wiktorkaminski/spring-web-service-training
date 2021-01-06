@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
         init() {
             this.institutionSlides[0].classList.add("active");
             this.addEventListeners();
+            setInterval(this.slideSwitcher, 500);
         }
 
         addEventListeners() {

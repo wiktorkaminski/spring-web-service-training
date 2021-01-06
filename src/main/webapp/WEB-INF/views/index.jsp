@@ -100,7 +100,6 @@
                             <div class="subtitle"><c:out value="${institution.description}"/></div>
                         </div>
                     </c:forEach>
-
                 </li>
                 <li>
                     <c:forEach items="${institutions}" var="institution" begin="${outerLoopStatus.index + 2}" end="${outerLoopStatus.index + 3}">
