@@ -99,12 +99,21 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$form = form;
       this.$next = form.querySelectorAll(".next-step");
       this.$prev = form.querySelectorAll(".prev-step");
-      this.$step = form.querySelector(".form--steps-counter span");
-      this.currentStep = 1;
 
+      this.$step = form.querySelector(".form--steps-counter span");
+
+      this.currentStep = 1;
       this.$stepInstructions = form.querySelectorAll(".form--steps-instructions p");
       const $stepForms = form.querySelectorAll("form > div");
+
       this.slides = [...this.$stepInstructions, ...$stepForms];
+
+      this.filledForm = {
+        categories: [],
+        quantity: 0,
+        pickupAddress: {},
+        pickupDetails: {}
+      };
 
       this.init();
     }
@@ -163,7 +172,30 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
-      // TODO: get data from inputs and show them in summary
+      if (this.currentStep >= 5) {
+        let checkedBoxes = this.$form.querySelectorAll(".checkbox--input:checked");
+        for (let i = 0; i < checkedBoxes.length; i++) {
+          let categoryDescription = checkedBoxes[i].nextElementSibling.nextElementSibling.textContent;
+          this.filledForm.categories.push(categoryDescription);
+        }
+
+        this.filledForm.quantity = this.$form.querySelector(".form--quantity").value;
+
+        let checkedRadio = this.$form.querySelector(".form--radio:checked");
+        this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
+
+        let pickupInputs = this.$form.querySelector(".form-section--columns");
+        this.filledForm.pickupAddress.street = pickupInputs.querySelector("#street").value;
+        this.filledForm.pickupAddress.city = pickupInputs.querySelector("#city").value;
+        this.filledForm.pickupAddress.zipCode = pickupInputs.querySelector("#zipCode").value;
+        this.filledForm.pickupDetails.phone = pickupInputs.querySelector("#phone").value;
+        this.filledForm.pickupDetails.pickupDate = pickupInputs.querySelector("#pickUpDate").value;
+        this.filledForm.pickupDetails.pickupTime = pickupInputs.querySelector("#pickUpTime").value;
+        this.filledForm.pickupDetails.pickupComment = pickupInputs.querySelector("#pickUpComment").value;
+
+        console.log(this.filledForm);
+      }
+      
     }
 
   }
