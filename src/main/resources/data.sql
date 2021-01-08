@@ -11,4 +11,4 @@ INSERT INTO donations (id, city, pick_up_comment, pick_up_date, pick_up_time, qu
 INSERT INTO categories (id, name) VALUES (1, 'Ubrania');
 INSERT INTO categories (id, name) VALUES (2, 'Zabawki');
 INSERT INTO categories (id, name) VALUES (3, 'Agd małe');
-INSERT INTO categories (id, name) VALUES (4, 'AGD duże');
+INSERT INTO categories (id, name) VALUES (4, 'Elektronika');

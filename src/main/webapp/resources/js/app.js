@@ -173,30 +173,95 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       if (this.currentStep >= 5) {
-        let checkedBoxes = this.$form.querySelectorAll(".checkbox--input:checked");
-        for (let i = 0; i < checkedBoxes.length; i++) {
-          let categoryDescription = checkedBoxes[i].nextElementSibling.nextElementSibling.textContent;
-          this.filledForm.categories.push(categoryDescription);
-        }
-
-        this.filledForm.quantity = this.$form.querySelector(".form--quantity").value;
-
-        let checkedRadio = this.$form.querySelector(".form--radio:checked");
-        this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
-
-        let pickupInputs = this.$form.querySelector(".form-section--columns");
-        this.filledForm.pickupAddress.street = pickupInputs.querySelector("#street").value;
-        this.filledForm.pickupAddress.city = pickupInputs.querySelector("#city").value;
-        this.filledForm.pickupAddress.zipCode = pickupInputs.querySelector("#zipCode").value;
-        this.filledForm.pickupDetails.phone = pickupInputs.querySelector("#phone").value;
-        this.filledForm.pickupDetails.pickupDate = pickupInputs.querySelector("#pickUpDate").value;
-        this.filledForm.pickupDetails.pickupTime = pickupInputs.querySelector("#pickUpTime").value;
-        this.filledForm.pickupDetails.pickupComment = pickupInputs.querySelector("#pickUpComment").value;
-
-        console.log(this.filledForm);
+        console.log("In step 6")
+        this.readInputs();
+        this.fillSummary();
       }
-      
+
     }
+
+    readInputs() {
+      this.step1Inputs();
+      this.step2Inputs();
+      this.step3Inputs();
+      this.step4Inputs();
+    }
+
+    step1Inputs() {
+      let checkedBoxes = this.$form.querySelectorAll(".checkbox--input:checked");
+      this.filledForm.categories.length = 0;
+      for (let i = 0; i < checkedBoxes.length; i++) {
+        let categoryDescription = checkedBoxes[i].nextElementSibling.nextElementSibling.textContent;
+        this.filledForm.categories.push(categoryDescription);
+      }
+    }
+
+    step2Inputs() {
+      this.filledForm.quantity = this.$form.querySelector("#quantity").value;
+    }
+
+    step3Inputs() {
+      let checkedRadio = this.$form.querySelector(".form--radio:checked");
+      this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
+    }
+
+    step4Inputs() {
+      let pickupInputs = this.$form.querySelector(".form-section--columns");
+      this.filledForm.pickupAddress.street = pickupInputs.querySelector("#street").value;
+      this.filledForm.pickupAddress.city = pickupInputs.querySelector("#city").value;
+      this.filledForm.pickupAddress.zipCode = pickupInputs.querySelector("#zipCode").value;
+      this.filledForm.pickupDetails.phone = pickupInputs.querySelector("#phone").value;
+      this.filledForm.pickupDetails.pickupDate = pickupInputs.querySelector("#pickUpDate").value;
+      this.filledForm.pickupDetails.pickupTime = pickupInputs.querySelector("#pickUpTime").value;
+      this.filledForm.pickupDetails.pickupComment = pickupInputs.querySelector("#pickUpComment").value;
+    }
+
+    fillSummary() {
+      let summary = this.$form.querySelector(".summary");
+      let summaryText = summary.querySelectorAll(".summary--text");
+      let summaryColumns = summary.querySelectorAll(".form-section--column");
+
+      summaryText[0].innerText = this.filledForm.quantity;
+      switch (this.filledForm.quantity) {
+        case '1':
+          summaryText[0].innerText += " worek";
+          break;
+        case '2':
+        case '3':
+        case '4':
+          summaryText[0].innerText += " worki";
+          break;
+        default :
+          summaryText[0].innerText += " worków";
+          break;
+      }
+      summaryText[0].innerText += ", w których są:"
+
+      for (let i = 0; i < this.filledForm.categories.length; i++) {
+        summaryText[0].innerText += " " + this.filledForm.categories[i].toLowerCase();
+        if (i !== this.filledForm.categories.length - 1) {
+          summaryText[0].innerText += ",";
+        } else {
+          summaryText[0].innerText += ".";
+        }
+      }
+
+      summaryText[1].innerText = "Dla: " + this.filledForm.institution;
+
+      let summaryColumnLeft = summaryColumns[0].querySelectorAll("li");
+      let summaryColumnRight = summaryColumns[1].querySelectorAll("li");
+
+      summaryColumnLeft[0].innerText = this.filledForm.pickupAddress.street;
+      summaryColumnLeft[1].innerText = this.filledForm.pickupAddress.city;
+      summaryColumnLeft[2].innerText = this.filledForm.pickupAddress.zipCode;
+      summaryColumnLeft[3].innerText = this.filledForm.pickupDetails.phone;
+
+      summaryColumnRight[0].innerText = this.filledForm.pickupDetails.pickupDate;
+      summaryColumnRight[1].innerText = this.filledForm.pickupDetails.pickupTime;
+      summaryColumnRight[2].innerText = this.filledForm.pickupDetails.pickupComment;
+    }
+
+
 
   }
   const form = document.querySelector(".form--steps");
