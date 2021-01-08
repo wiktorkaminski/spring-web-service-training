@@ -7,3 +7,8 @@ INSERT INTO donations (id, city, pick_up_comment, pick_up_date, pick_up_time, qu
 INSERT INTO donations (id, city, pick_up_comment, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id) VALUES (2, 'Tychy', 'Dzwonić przed przyjazdem na numer 500-111-222', '2021-01-04', '18:00:00', 2, 'Kobiórska 77a', '43-100', 2);
 INSERT INTO donations (id, city, pick_up_comment, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id) VALUES (3, 'Wyry', 'Wejście od podwórza', '2021-01-04', '18:00:00', 7, 'Spokojna 1', '43-175', 4);
 INSERT INTO donations (id, city, pick_up_comment, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id) VALUES (4, 'Katowice', 'Proszę o telefon', '2021-01-04', '18:00:00', 1, 'Rodzinna 81/32', '40-203', 3);
+
+INSERT INTO categories (id, name) VALUES (1, 'Ubrania');
+INSERT INTO categories (id, name) VALUES (2, 'Zabawki');
+INSERT INTO categories (id, name) VALUES (3, 'Agd małe');
+INSERT INTO categories (id, name) VALUES (4, 'Elektronika');
