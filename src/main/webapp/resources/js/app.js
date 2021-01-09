@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Next step
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
+          if (!this.validateFormInputs()) return;
           e.preventDefault();
           this.currentStep++;
           this.updateForm();
@@ -142,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Previous step
       this.$prev.forEach(btn => {
         btn.addEventListener("click", e => {
+          if (!this.validateFormInputs()) return;
           e.preventDefault();
           this.currentStep--;
           this.updateForm();
@@ -152,14 +154,27 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$form.querySelector("form").addEventListener("submit", e => this.submit(e));
     }
 
+    validateFormInputs() {
+      if (this.currentStep === 2) {
+        let quantity = this.$form.querySelector("#quantity").value
+        if (isNaN(this.filledForm.quantity) || quantity === "") {
+          alert("Wprowadź prawidłową liczbę worków.");
+          return false;
+        }
+        if (quantity <= 0) {
+          alert("Należy podać wartość większą od zera.");
+          return false;
+        }
+      }
+      return true;
+    }
+
     /**
      * Update form front-end
      * Show next or previous section etc.
      */
     updateForm() {
       this.$step.innerText = this.currentStep;
-
-      // TODO: Validation
 
       this.slides.forEach(slide => {
         slide.classList.remove("active");
@@ -173,7 +188,6 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       if (this.currentStep >= 5) {
-        console.log("In step 6")
         this.readInputs();
         this.fillSummary();
       }
