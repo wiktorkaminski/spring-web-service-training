@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     validateFormInputs() {
       if (this.currentStep === 1) {
-        this.step1Inputs();
+        this.readStep1Inputs();
         if (this.filledForm.categories.length === 0) {
           alert("Wybierz co najmniej jedną kategorię.");
           return false;
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
       if (this.currentStep === 2) {
-        this.step2Inputs()
+        this.readStep2Inputs()
         if (isNaN(this.filledForm.quantity) || this.filledForm.quantity === "") {
           alert("Wprowadź prawidłową liczbę worków.");
           return false;
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
       if (this.currentStep === 3) {
-        this.step3Inputs()
+        this.readStep3Inputs()
         if (this.filledForm.institution == null) {
           alert("Wybierz jedną instytucję, której chcesz przekazać dary.")
           return false;
@@ -211,13 +211,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     readInputs() {
-      this.step1Inputs();
-      this.step2Inputs();
-      this.step3Inputs();
-      this.step4Inputs();
+      this.readStep1Inputs();
+      this.readStep2Inputs();
+      this.readStep3Inputs();
+      this.readStep4Inputs();
     }
 
-    step1Inputs() {
+    readStep1Inputs() {
       let checkedBoxes = this.$form.querySelectorAll(".checkbox--input:checked");
       this.filledForm.categories.length = 0;
       for (let i = 0; i < checkedBoxes.length; i++) {
@@ -226,18 +226,18 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
 
-    step2Inputs() {
+    readStep2Inputs() {
       this.filledForm.quantity = this.$form.querySelector("#quantity").value;
     }
 
-    step3Inputs() {
+    readStep3Inputs() {
       let checkedRadio = this.$form.querySelector(".form--radio:checked");
       if (checkedRadio != null) {
         this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
       }
     }
 
-    step4Inputs() {
+    readStep4Inputs() {
       let pickupInputs = this.$form.querySelector(".form-section--columns");
       this.filledForm.pickupAddress.street = pickupInputs.querySelector("#street").value;
       this.filledForm.pickupAddress.city = pickupInputs.querySelector("#city").value;
