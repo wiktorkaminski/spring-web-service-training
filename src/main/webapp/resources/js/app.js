@@ -155,8 +155,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     validateFormInputs() {
+      if (this.currentStep === 1) {
+        let pickedCategories = this.$form.querySelectorAll(".checkbox--input:checked");
+        console.log(pickedCategories);
+        if (pickedCategories.length === 0) {
+          alert("Wybierz co najmniej jedną kategorię.");
+          return false;
+        }
+        return true;
+      }
+
+
       if (this.currentStep === 2) {
-        let quantity = this.$form.querySelector("#quantity").value
+        let quantity = this.$form.querySelector("#quantity").value;
         if (isNaN(this.filledForm.quantity) || quantity === "") {
           alert("Wprowadź prawidłową liczbę worków.");
           return false;
