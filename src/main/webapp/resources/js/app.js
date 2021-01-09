@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.filledForm = {
         categories: [],
         quantity: 0,
+        institution: null,
         pickupAddress: {},
         pickupDetails: {}
       };
@@ -143,7 +144,6 @@ document.addEventListener("DOMContentLoaded", function() {
       // Previous step
       this.$prev.forEach(btn => {
         btn.addEventListener("click", e => {
-          if (!this.validateFormInputs()) return;
           e.preventDefault();
           this.currentStep--;
           this.updateForm();
@@ -156,24 +156,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
     validateFormInputs() {
       if (this.currentStep === 1) {
-        let pickedCategories = this.$form.querySelectorAll(".checkbox--input:checked");
-        console.log(pickedCategories);
-        if (pickedCategories.length === 0) {
+        this.step1Inputs();
+        if (this.filledForm.categories.length === 0) {
           alert("Wybierz co najmniej jedną kategorię.");
           return false;
         }
-        return true;
       }
 
-
       if (this.currentStep === 2) {
-        let quantity = this.$form.querySelector("#quantity").value;
-        if (isNaN(this.filledForm.quantity) || quantity === "") {
+        this.step2Inputs()
+        if (isNaN(this.filledForm.quantity) || this.filledForm.quantity === "") {
           alert("Wprowadź prawidłową liczbę worków.");
           return false;
         }
-        if (quantity <= 0) {
+        if (this.filledForm.quantity <= 0) {
           alert("Należy podać wartość większą od zera.");
+          return false;
+        }
+      }
+
+      if (this.currentStep === 3) {
+        this.step3Inputs()
+        if (this.filledForm.institution == null) {
+          alert("Wybierz jedną instytucję, której chcesz przekazać dary.")
           return false;
         }
       }
@@ -227,7 +232,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     step3Inputs() {
       let checkedRadio = this.$form.querySelector(".form--radio:checked");
-      this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
+      if (checkedRadio != null) {
+        this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
+      }
     }
 
     step4Inputs() {
