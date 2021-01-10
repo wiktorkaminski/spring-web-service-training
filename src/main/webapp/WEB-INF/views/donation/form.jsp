@@ -161,13 +161,13 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input path="zipCode" type="text"/>
+                                Kod pocztowy <form:input path="zipCode" type="text" placeholder="xx-xxx"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <form:input path="phone" type="phone" />
+                                Numer telefonu <form:input path="phone" type="phone" placeholer="xxx-xxx-xxx"/>
                             </label>
                         </div>
                     </div>
