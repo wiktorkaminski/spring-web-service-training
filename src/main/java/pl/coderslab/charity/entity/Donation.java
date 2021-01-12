@@ -2,6 +2,7 @@ package pl.coderslab.charity.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -34,18 +35,26 @@ public class Donation {
     Institution institution;
 
     @NotBlank
+    @Column(length = 100)
+    @Length(max = 100)
     String street;
 
     @NotBlank
+    @Column(length = 60)
+    @Length(max = 60)
     String city;
 
     @Column(length = 6)
+    @Length(max = 6)
     @Pattern(regexp = "^([0-9]{2}-[0-9]{3})$")
     String zipCode;
+
 
     @Pattern(regexp = "^((\\+48 ?)?[0-9]{3}[- ][0-9]{3}[- ][0-9]{3})$|" +
             "^((\\+48 ?)?[0-9]{9})$|" +
             "^(\\+48 ?)?[0-9]{2}[- ][0-9]{3}[- ][0-9]{2}[- ][0-9]{2}$")
+    @Column(length = 18)
+    @Length(max = 18)
     String phone;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -55,6 +64,7 @@ public class Donation {
     @NotNull
     LocalTime pickUpTime;
 
+    @Length(max = 255)
     String pickUpComment;
 
 
