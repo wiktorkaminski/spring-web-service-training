@@ -3,6 +3,7 @@ package pl.coderslab.charity.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,9 @@ import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+
+import javax.validation.Valid;
+import javax.validation.ValidationException;
 
 @Controller
 @RequestMapping("/donations")
@@ -35,8 +39,8 @@ public class DonationController {
     }
 
     @PostMapping("/form")
-    public String processForm(Donation donation) {
-        donationRepository.save(donation);
+    public String processForm(@Valid Donation donation, BindingResult bindingResult) {
+            donationRepository.save(donation);
         return "redirect:/";
     }
 }
