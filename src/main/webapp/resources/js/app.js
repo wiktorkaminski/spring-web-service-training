@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       this.$step = form.querySelector(".form--steps-counter span");
 
-      this.currentStep = 4;
+      this.currentStep = 2;
       this.$stepInstructions = form.querySelectorAll(".form--steps-instructions p");
       const $stepForms = form.querySelectorAll("form > div");
 
