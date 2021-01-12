@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /**
+    /**
      * Form Select
      */
     class FormSelect {
@@ -101,15 +101,17 @@ document.addEventListener("DOMContentLoaded", function () {
             this.$next = form.querySelectorAll(".next-step");
             this.$prev = form.querySelectorAll(".prev-step");
             this.$step = form.querySelector(".form--steps-counter span");
-            this.currentStep = 1;
 
+            this.currentStep = 1;
             this.$stepInstructions = form.querySelectorAll(".form--steps-instructions p");
             const $stepForms = form.querySelectorAll("form > div");
+
             this.slides = [...this.$stepInstructions, ...$stepForms];
 
             this.filledForm = {
                 categories: [],
                 quantity: 0,
+                institution: null,
                 pickupAddress: {},
                 pickupDetails: {}
             };
@@ -129,97 +131,97 @@ document.addEventListener("DOMContentLoaded", function () {
          * All events that are happening in form
          */
         events() {
-      // Next step
-      this.$next.forEach(btn => {
-        btn.addEventListener("click", e => {
-          if (!this.validateFormInputs()) return;
-          e.preventDefault();
-          this.currentStep++;
-          this.updateForm();
-        });
-      });
+            // Next step
+            this.$next.forEach(btn => {
+                btn.addEventListener("click", e => {
+                    if (!this.validateFormInputs()) return;
+                    e.preventDefault();
+                    this.currentStep++;
+                    this.updateForm();
+                });
+            });
 
-      // Previous step
-      this.$prev.forEach(btn => {
-        btn.addEventListener("click", e => {
-          e.preventDefault();
-          this.currentStep--;
-          this.updateForm();
-        });
+            // Previous step
+            this.$prev.forEach(btn => {
+                btn.addEventListener("click", e => {
+                    e.preventDefault();
+                    this.currentStep--;
+                    this.updateForm();
+                });
             });
 
             // Form submit
             this.$form.querySelector("form").addEventListener("submit", e => this.submit(e));
         }
 
-validateFormInputs() {
-      if (this.currentStep === 1) {
-        this.readStep1Inputs();
-        if (this.filledForm.categories.length === 0) {
-          return this.invalidateCallbackFn("Wybierz co najmniej jedną kategorię.");
-        }
-      }
+        validateFormInputs() {
+            if (this.currentStep === 1) {
+                this.readStep1Inputs();
+                if (this.filledForm.categories.length === 0) {
+                    return this.invalidateCallbackFn("Wybierz co najmniej jedną kategorię.");
+                }
+            }
 
-      if (this.currentStep === 2) {
-        this.readStep2Inputs();
-        if (isNaN(this.filledForm.quantity) || this.filledForm.quantity === "") {
-          return this.invalidateCallbackFn("Wprowadź prawidłową liczbę worków.");
-        }
-        if (this.filledForm.quantity <= 0) {
-          return this.invalidateCallbackFn("Należy podać wartość większą od zera.");
-        }
-      }
+            if (this.currentStep === 2) {
+                this.readStep2Inputs();
+                if (isNaN(this.filledForm.quantity) || this.filledForm.quantity === "") {
+                    return this.invalidateCallbackFn("Wprowadź prawidłową liczbę worków.");
+                }
+                if (this.filledForm.quantity <= 0) {
+                    return this.invalidateCallbackFn("Należy podać wartość większą od zera.");
+                }
+            }
 
-      if (this.currentStep === 3) {
-        this.readStep3Inputs();
-        if (this.filledForm.institution == null) {
-          return this.invalidateCallbackFn("Wybierz jedną instytucję, której chcesz przekazać dary.")
+            if (this.currentStep === 3) {
+                this.readStep3Inputs();
+                if (this.filledForm.institution == null) {
+                    return this.invalidateCallbackFn("Wybierz jedną instytucję, której chcesz przekazać dary.")
+                }
+            }
+
+            if (this.currentStep === 4) {
+                this.readStep4Inputs();
+                if (this.filledForm.pickupAddress.street === "" ||
+                    this.filledForm.pickupAddress.city === "" ||
+                    this.filledForm.pickupAddress.zipCode === "" ||
+                    this.filledForm.pickupDetails.phone === "" ||
+                    this.filledForm.pickupDetails.pickupDate === ""
+                ) {
+                    return this.invalidateCallbackFn("Wszystkie pola, za wyjątkiem uwag dla kuriera muszą być wypełnione");
+
+                }
+
+                let zipCodeRegEx = /^([0-9]{2}-[0-9]{3})$/;
+                if (!zipCodeRegEx.test(this.filledForm.pickupAddress.zipCode)) {
+                    return this.invalidateCallbackFn("Niepoprawny kod pocztowy");
+                }
+
+                let plCellRegEx = /^((\+48 ?)?[0-9]{3}[- ][0-9]{3}[- ][0-9]{3})$|^((\+48 ?)?[0-9]{9})$/;
+                let plLandLineRegEx = /^(\+48 ?)?[0-9]{2}[- ][0-9]{3}[- ][0-9]{2}[- ][0-9]{2}$/;
+                if (!((plCellRegEx.test(this.filledForm.pickupDetails.phone)) ||
+                    (plLandLineRegEx.test(this.filledForm.pickupDetails.phone)))) {
+                    return this.invalidateCallbackFn("Niepoprawny numer telefonu. Możliwe podanie wyłącznie numerów zarejestrowanych w polsce. " +
+                        "(opcjonalnie można podać prefix +48)");
+
+                }
+
+                let dateRegEx = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/
+                let currDate = new Date()
+                let date = new Date(this.filledForm.pickupDetails.pickupDate);
+                if (!dateRegEx.test(this.filledForm.pickupDetails.pickupDate)) {
+                    return this.invalidateCallbackFn("Podaj datę w formacie rrrr-mm-dd.")
+                }
+                if (date < currDate) {
+                    return this.invalidateCallbackFn("Podana data musi być w przyszłości.");
+                }
+            }
+            return true;
         }
-      }
 
-      if (this.currentStep === 4) {
-        this.readStep4Inputs();
-        if (this.filledForm.pickupAddress.street === "" ||
-            this.filledForm.pickupAddress.city === "" ||
-            this.filledForm.pickupAddress.zipCode === "" ||
-            this.filledForm.pickupDetails.phone === "" ||
-            this.filledForm.pickupDetails.pickupDate === ""
-            ) {
-          return this.invalidateCallbackFn("Wszystkie pola, za wyjątkiem uwag dla kuriera muszą być wypełnione");
-
+        invalidateCallbackFn(msg) {
+            alert(msg);
+            return false;
         }
-
-        let zipCodeRegEx = /^([0-9]{2}-[0-9]{3})$/;
-        if (!zipCodeRegEx.test(this.filledForm.pickupAddress.zipCode)) {
-          return this.invalidateCallbackFn("Niepoprawny kod pocztowy");
-        }
-
-        let plCellRegEx = /^((\+48 ?)?[0-9]{3}[- ][0-9]{3}[- ][0-9]{3})$|^((\+48 ?)?[0-9]{9})$/;
-        let plLandLineRegEx = /^(\+48 ?)?[0-9]{2}[- ][0-9]{3}[- ][0-9]{2}[- ][0-9]{2}$/;
-        if (!((plCellRegEx.test(this.filledForm.pickupDetails.phone)) ||
-            (plLandLineRegEx.test(this.filledForm.pickupDetails.phone)))) {
-          return this.invalidateCallbackFn("Niepoprawny numer telefonu. Możliwe podanie wyłącznie numerów zarejestrowanych w polsce. " +
-              "(opcjonalnie można podać prefix +48)");
-
-        }
-
-        let dateRegEx = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/
-        let currDate = new Date()
-        let date = new Date(this.filledForm.pickupDetails.pickupDate);
-        if (!dateRegEx.test(this.filledForm.pickupDetails.pickupDate)) {
-          return this.invalidateCallbackFn("Podaj datę w formacie rrrr-mm-dd.")
-        }
-        if (date < currDate) {
-          return this.invalidateCallbackFn("Podana data musi być w przyszłości.");
-        }
-      }
-      return true;
-    }
-
-    invalidateCallbackFn(msg) {
-      alert(msg);
-      return false;
-    }
 
 
         /**
@@ -247,36 +249,36 @@ validateFormInputs() {
             }
         }
 
-readStep1Inputs() {
-      let checkedBoxes = this.$form.querySelectorAll(".checkbox--input:checked");
-      this.filledForm.categories.length = 0;
-      for (let i = 0; i < checkedBoxes.length; i++) {
-        let categoryDescription = checkedBoxes[i].nextElementSibling.nextElementSibling.textContent;
-        this.filledForm.categories.push(categoryDescription);
-      }
-    }
+        readStep1Inputs() {
+            let checkedBoxes = this.$form.querySelectorAll(".checkbox--input:checked");
+            this.filledForm.categories.length = 0;
+            for (let i = 0; i < checkedBoxes.length; i++) {
+                let categoryDescription = checkedBoxes[i].nextElementSibling.nextElementSibling.textContent;
+                this.filledForm.categories.push(categoryDescription);
+            }
+        }
 
-    readStep2Inputs() {
-      this.filledForm.quantity = this.$form.querySelector("#quantity").value;
-    }
+        readStep2Inputs() {
+            this.filledForm.quantity = this.$form.querySelector("#quantity").value;
+        }
 
-    readStep3Inputs() {
-      let checkedRadio = this.$form.querySelector(".form--radio:checked");
-      if (checkedRadio != null) {
-        this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
-      }
-    }
+        readStep3Inputs() {
+            let checkedRadio = this.$form.querySelector(".form--radio:checked");
+            if (checkedRadio != null) {
+                this.filledForm.institution = checkedRadio.nextElementSibling.nextElementSibling.firstElementChild.textContent;
+            }
+        }
 
-    readStep4Inputs() {
-      let pickupInputs = this.$form.querySelector(".form-section--columns");
-      this.filledForm.pickupAddress.street = pickupInputs.querySelector("#street").value;
-      this.filledForm.pickupAddress.city = pickupInputs.querySelector("#city").value;
-      this.filledForm.pickupAddress.zipCode = pickupInputs.querySelector("#zipCode").value.trim();
-      this.filledForm.pickupDetails.phone = pickupInputs.querySelector("#phone").value.trim();
-      this.filledForm.pickupDetails.pickupDate = pickupInputs.querySelector("#pickUpDate").value;
-      this.filledForm.pickupDetails.pickupTime = pickupInputs.querySelector("#pickUpTime").value;
-      this.filledForm.pickupDetails.pickupComment = pickupInputs.querySelector("#pickUpComment").value;
-    }
+        readStep4Inputs() {
+            let pickupInputs = this.$form.querySelector(".form-section--columns");
+            this.filledForm.pickupAddress.street = pickupInputs.querySelector("#street").value;
+            this.filledForm.pickupAddress.city = pickupInputs.querySelector("#city").value;
+            this.filledForm.pickupAddress.zipCode = pickupInputs.querySelector("#zipCode").value.trim();
+            this.filledForm.pickupDetails.phone = pickupInputs.querySelector("#phone").value.trim();
+            this.filledForm.pickupDetails.pickupDate = pickupInputs.querySelector("#pickUpDate").value;
+            this.filledForm.pickupDetails.pickupTime = pickupInputs.querySelector("#pickUpTime").value;
+            this.filledForm.pickupDetails.pickupComment = pickupInputs.querySelector("#pickUpComment").value;
+        }
 
         fillSummary() {
             let summary = this.$form.querySelector(".summary");
