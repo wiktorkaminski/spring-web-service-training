@@ -20,8 +20,7 @@ public class RegistrationService {
     }
 
     public boolean checkIfUserExists(User user) {
-        Optional<User> userByEmail = userRepository.findFirstByEmail(user.getEmail());
-        return userByEmail.isPresent();
+        return userRepository.existsUserByEmail(user.getEmail());
     }
 
     public User saveUser(User user) {
