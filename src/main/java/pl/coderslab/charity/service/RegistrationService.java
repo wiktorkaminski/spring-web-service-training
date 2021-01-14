@@ -25,12 +25,4 @@ public class RegistrationService {
         return userRepository.save(user);
     }
 
-    public void clearEmailAndPasswordField(CharityUser user) {
-        user.setPassword("");
-        user.setEmail("");
-    }
-
-    public void clearPasswordField(CharityUser user) {
-        user.setPassword("");
-    }
 }
