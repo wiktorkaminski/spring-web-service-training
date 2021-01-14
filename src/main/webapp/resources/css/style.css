@@ -1833,3 +1833,8 @@ footer .bottom-line--icons a img {
   color: red;
   opacity: 1;
 }
+
+.login-form--error {
+  margin-left: 15px;
+  text-decoration-color: red;
+}

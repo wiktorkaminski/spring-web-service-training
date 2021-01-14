@@ -1,10 +1,8 @@
 package pl.coderslab.charity.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import pl.coderslab.charity.entity.User;
+import pl.coderslab.charity.entity.CharityUser;
 
-import java.util.Optional;
-
-public interface UserRepository extends CrudRepository<User, Long> {
-    Optional<User> findFirstByEmail(String email);
+public interface UserRepository extends CrudRepository<CharityUser, Long> {
+    Boolean existsUserByEmail(String email);
 }

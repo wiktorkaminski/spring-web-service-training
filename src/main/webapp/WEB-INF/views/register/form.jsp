@@ -26,25 +26,23 @@
 
 <section class="login-page">
     <h2>Załóż konto</h2>
-    <form:form method="POST" modelAttribute="user">
+    <form:form method="POST" modelAttribute="user" onsubmit="return validate(evt)">
         <div class="form-group">
             <form:input type="text" path="firstName" placeholder="Imię" />
+            <form:errors path="firstName" cssClass="login-form--error"/>
         </div>
         <div class="form-group">
             <form:input type="text" path="lastName" placeholder="Nazwisko" />
+            <form:errors path="lastName" cssClass="login-form--error"/>
+
         </div>
-        <c:if test="${empty userExistsFlag}">
             <div class="form-group">
                 <form:input type="email" path="email" placeholder="Email" />
+                <form:errors path="email" cssClass="login-form--error"/>
             </div>
-        </c:if>
-        <c:if test="${not empty userExistsFlag}">
-            <div class="form-group form-group-red">
-                <form:input type="email" path="email" placeholder="Email jest już zajęty!" />
-            </div>
-        </c:if>
         <div class="form-group">
             <form:input type="password" path="password" placeholder="Hasło" />
+            <form:errors path="password" cssClass="login-form--error"/>
         </div>
         <div class="form-group">
             <input type="password" name="password2" placeholder="Powtórz hasło" />
