@@ -2,10 +2,8 @@ package pl.coderslab.charity.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.coderslab.charity.entity.User;
+import pl.coderslab.charity.entity.CharityUser;
 import pl.coderslab.charity.repository.UserRepository;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -13,22 +11,26 @@ public class RegistrationService {
 
     private final UserRepository userRepository;
 
-    public void trimFields(User user) {
+    public void trimFields(CharityUser user) {
         user.setFirstName(user.getFirstName().trim());
         user.setLastName(user.getLastName().trim());
         user.setEmail(user.getEmail().trim());
     }
 
-    public boolean checkIfUserExists(User user) {
+    public boolean checkIfUserExists(CharityUser user) {
         return userRepository.existsUserByEmail(user.getEmail());
     }
 
-    public User saveUser(User user) {
+    public CharityUser saveUser(CharityUser user) {
         return userRepository.save(user);
     }
 
-    public void clearEmailAndPasswordField(User user) {
-        user.setPassword(null);
-        user.setEmail(null);
+    public void clearEmailAndPasswordField(CharityUser user) {
+        user.setPassword("");
+        user.setEmail("");
+    }
+
+    public void clearPasswordField(CharityUser user) {
+        user.setPassword("");
     }
 }
