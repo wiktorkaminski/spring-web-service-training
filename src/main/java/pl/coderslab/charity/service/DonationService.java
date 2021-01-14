@@ -39,7 +39,7 @@ public class DonationService {
         sb.append("Errors: \n");
         for (FieldError err : errors) {
             sb.append(err.getField());
-            sb.append(" : ");sb.append(err.getDefaultMessage());
+            sb.append(" : ").append(err.getDefaultMessage());
             sb.append("\n");
 
         }
