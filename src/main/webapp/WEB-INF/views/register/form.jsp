@@ -26,7 +26,7 @@
 
 <section class="login-page">
     <h2>Załóż konto</h2>
-    <form:form method="POST" modelAttribute="user" onsubmit="return validate(evt)">
+    <form:form method="POST" modelAttribute="user" id="registerForm">
         <div class="form-group">
             <form:input type="text" path="firstName" placeholder="Imię" />
             <form:errors path="firstName" cssClass="login-form--error"/>

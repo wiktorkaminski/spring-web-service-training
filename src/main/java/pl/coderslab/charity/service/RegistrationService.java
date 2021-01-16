@@ -1,6 +1,7 @@
 package pl.coderslab.charity.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.DTO.UserDTO;
 import pl.coderslab.charity.entity.CharityUser;
@@ -11,6 +12,7 @@ import pl.coderslab.charity.repository.UserRepository;
 public class RegistrationService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void trimFields(UserDTO user) {
         user.setFirstName(user.getFirstName().trim());
@@ -28,6 +30,10 @@ public class RegistrationService {
 
     public CharityUser saveUser(CharityUser user) {
         return userRepository.save(user);
+    }
+
+    public void encodePassword(CharityUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 
 }

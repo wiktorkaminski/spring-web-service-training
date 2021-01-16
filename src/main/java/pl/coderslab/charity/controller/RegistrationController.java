@@ -1,6 +1,7 @@
 package pl.coderslab.charity.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,8 +44,10 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) return "register/form";
 
         CharityUser charityUser = charityUserService.dtoToEntity(user);
+
+        registrationService.encodePassword(charityUser);
         registrationService.saveUser(charityUser);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }
