@@ -1,19 +1,20 @@
 package pl.coderslab.charity.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Entity
 @Table(
-        name = "user_authorities",
+        name = "authorities",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "authority"})}
 )
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserAuthority {
+public class Authority implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

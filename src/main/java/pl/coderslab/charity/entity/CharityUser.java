@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
@@ -35,9 +33,12 @@ public class CharityUser implements UserDetails {
 
     boolean enabled = true;
 
+    @OneToMany
+    Collection<Authority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return authorities;
     }
 
     @Override

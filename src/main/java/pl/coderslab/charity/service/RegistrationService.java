@@ -5,9 +5,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.DTO.UserDTO;
 import pl.coderslab.charity.entity.CharityUser;
-import pl.coderslab.charity.entity.UserAuthority;
-import pl.coderslab.charity.repository.UserAuthorityRepository;
+import pl.coderslab.charity.entity.Authority;
+import pl.coderslab.charity.repository.AuthorityRepository;
 import pl.coderslab.charity.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +18,7 @@ public class RegistrationService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserAuthorityRepository userAuthorityRepository;
+    private final AuthorityRepository authorityRepository;
 
     public void trimFields(UserDTO user) {
         user.setFirstName(user.getFirstName().trim());
@@ -39,11 +42,16 @@ public class RegistrationService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 
-    public void grantAuthoritiesToUser(String email, String[] authorities) {
+    public void grantAuthoritiesToUser(CharityUser charityUser, String[] authorities) {
+        String email = charityUser.getEmail();
+        List<Authority> userAuthorities = new ArrayList<>();
         for (String authority : authorities) {
-            UserAuthority ua = new UserAuthority(null, email, authority);
-            userAuthorityRepository.save(ua);
+            Authority ua = new Authority(null, email, authority);
+            Authority savedAuthority = authorityRepository.save(ua);
+            userAuthorities.add(savedAuthority);
         }
+        charityUser.setAuthorities(userAuthorities);
     }
 
 }
+

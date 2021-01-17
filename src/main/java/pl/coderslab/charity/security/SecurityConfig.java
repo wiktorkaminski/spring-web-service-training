@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "SELECT email, password, enabled FROM users WHERE email=?"
                 )
                 .authoritiesByUsernameQuery(
-                        "SELECT email, authority FROM user_authorities WHERE email=?"
+                        "SELECT email, authority FROM authorities WHERE email=?"
                 )
                 .passwordEncoder(new BCryptPasswordEncoder())
         ;
