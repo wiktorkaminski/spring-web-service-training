@@ -9,8 +9,7 @@
 <body>
 <header>
     <nav class="container container--70">
-        <%@include file="/WEB-INF/jspf/nav-top-login-register-bar.jspf" %>
-        <%@include file="/WEB-INF/jspf/nav-top-nav-bar.jspf" %>
+        <%@include file="/WEB-INF/jspf/nav-top.jspf" %>
     </nav>
 </header>
 
