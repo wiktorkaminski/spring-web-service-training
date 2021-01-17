@@ -2,16 +2,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav class="container container--70">
-   <c:if test="${empty userDetails}">
+   <c:if test="${empty userFirstName}">
        <ul class="nav--actions">
            <li><a href="${pageContext.request.contextPath}/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
            <li><a href="${pageContext.request.contextPath}/register/form" class="btn btn--small btn--highlighted">Załóż konto</a></li>
        </ul>
    </c:if>
-    <c:if test="${not empty userDetails}">
+    <c:if test="${not empty userFirstName}">
         <ul class="nav--actions">
             <li class="logged-user">
-                Witaj <c:out value="${userDetails.userName}"/>
+                Witaj <c:out value="${userFirstName}"/>
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>

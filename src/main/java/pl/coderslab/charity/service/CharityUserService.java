@@ -1,11 +1,20 @@
 package pl.coderslab.charity.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.DTO.UserDTO;
 import pl.coderslab.charity.entity.CharityUser;
+import pl.coderslab.charity.repository.UserRepository;
+
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CharityUserService {
+
+    private final UserRepository userRepository;
 
     public CharityUser dtoToEntity(UserDTO dto) {
         CharityUser entity = new CharityUser();
@@ -29,5 +38,12 @@ public class CharityUserService {
         dto.setPassword(entity.getPassword());
 
         return dto;
+    }
+
+    public String getUserFirstName(Authentication authentication) {
+        User principal = (User) authentication.getPrincipal();
+        String email = principal.getUsername();
+        Optional<String> userFirstName = userRepository.findUserFirstNameByEmail(email);
+        return userFirstName.orElse(null);
     }
 }

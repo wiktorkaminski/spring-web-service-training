@@ -1,7 +1,9 @@
 package pl.coderslab.charity.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +15,7 @@ import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.service.CharityUserService;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -25,13 +28,12 @@ public class HomeController {
     private final CharityUserService charityUserService;
 
     @ModelAttribute
-    public void getLoggedUserDetails(@AuthenticationPrincipal CharityUser charityUser, Model model) {
-        if (charityUser == null) {
-            System.out.println("Logged-in user is null");
-        }
-        if (charityUser != null) {
-            UserDTO userDTO = charityUserService.entityToDto(charityUser);
-            model.addAttribute("userDetails", userDTO);
+    public void getLoggedUserName(Authentication authentication, Model model) {
+        if (authentication == null) return;
+
+        String userFirstName = charityUserService.getUserFirstName(authentication);
+        if (userFirstName != null) {
+            model.addAttribute("userFirstName", userFirstName);
         }
     }
 
