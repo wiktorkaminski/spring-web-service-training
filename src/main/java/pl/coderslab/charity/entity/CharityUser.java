@@ -1,12 +1,13 @@
 package pl.coderslab.charity.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -36,7 +37,7 @@ public class CharityUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
