@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group form-group--buttons">
-          <a href="#" class="btn btn--without-border">Załóż konto</a>      
+          <a href="${pageContext.request.contextPath}/register/form" class="btn btn--without-border">Załóż konto</a>
           <button class="btn" type="submit">Zaloguj się</button> 
         </div>
       </form>
