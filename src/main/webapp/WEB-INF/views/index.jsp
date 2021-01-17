@@ -10,7 +10,10 @@
 <body>
 <header class="header--main-page">
 
-    <%@include file="/WEB-INF/jspf/nav-top.jspf" %>
+    <nav class="container container--70">
+        <%@include file="/WEB-INF/jspf/nav-top-login-register-bar.jspf" %>
+        <%@include file="/WEB-INF/jspf/nav-top-nav-bar.jspf" %>
+    </nav>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
