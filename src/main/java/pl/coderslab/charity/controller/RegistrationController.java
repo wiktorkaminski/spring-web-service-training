@@ -45,6 +45,7 @@ public class RegistrationController {
 
         CharityUser charityUser = charityUserService.dtoToEntity(user);
 
+        registrationService.grantAuthoritiesToUser(charityUser.getEmail(), new String[]{"USER"});
         registrationService.encodePassword(charityUser);
         registrationService.saveUser(charityUser);
         return "redirect:/login";
