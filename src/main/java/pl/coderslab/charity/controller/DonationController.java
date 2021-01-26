@@ -52,9 +52,9 @@ public class DonationController {
     }
 
     @PostMapping("/form")
-    public String processForm(@Valid Donation donation, BindingResult bindingResult, Model model) {
+    public String processForm(@Valid Donation donation, BindingResult bindingResult, Authentication authentication, Model model) {
         if (!bindingResult.hasErrors()) {
-            donationService.saveDonation(donation);
+            donationService.saveDonation(authentication, donation);
         } else {
             String errorMsg = donationService.prepareErrorMsg(bindingResult.getFieldErrors());
             model.addAttribute("errorMsg", errorMsg);

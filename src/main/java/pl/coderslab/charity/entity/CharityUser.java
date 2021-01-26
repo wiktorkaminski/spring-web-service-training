@@ -7,7 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(
@@ -28,6 +30,9 @@ public class CharityUser implements UserDetails {
 
     @Column(unique = true, nullable = false)
     private String email;
+
+    @OneToMany
+    private List<Donation> donations = new ArrayList<>();
 
     private String password;
 
