@@ -51,8 +51,6 @@ public class DonationService {
         }
     }
 
-
-
     public String prepareErrorMsg(List<FieldError> errors) {
         StringBuilder sb = new StringBuilder();
         sb.append("Errors: \n");
