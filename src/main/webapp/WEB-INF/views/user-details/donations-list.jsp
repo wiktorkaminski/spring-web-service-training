@@ -28,16 +28,16 @@
 <section id="supported-institutions" class="help">
     <h2>Twoje zbiórki</h2>
 
-        <div class="help--slides" data-id="${outerLoopStatus.count}">
+        <div class="help--slides active">
 
-            <p>Oto lista fundacji, które otrzymały od Ciebie pomoc.</p>
+            <p>Oto lista fundacji, które otrzymały od Ciebie pomoc</p>
 
             <ul class="help--slides-items">
                 <li>
                     <c:forEach items="${donations}" var="donation">
                         <div class="col">
-<%--                            <div class="title"><c:out value="${institution.name}"/></div>--%>
-<%--                            <div class="subtitle"><c:out value="${institution.description}"/></div>--%>
+                            <div class="title"><c:out value="${donation.INSTITUTION_NAME}"/></div>
+                            <div class="subtitle">Przekazanych worków: <c:out value="${donation.QUANTITY}"/></div>
                         </div>
                     </c:forEach>
                 </li>
@@ -54,6 +54,5 @@
     <%@include file="/WEB-INF/jspf/footer-bottom-line-div.jspf" %>
 </footer>
 
-<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
