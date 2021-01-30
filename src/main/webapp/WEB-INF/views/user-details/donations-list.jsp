@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <%@include file="/WEB-INF/jspf/head.jspf"%>
+    <%@include file="/WEB-INF/jspf/head.jspf" %>
 </head>
 <body>
 <header class="header--main-page">
@@ -28,25 +28,32 @@
 <section id="supported-institutions" class="help">
     <h2>Twoje zbiórki</h2>
 
-        <div class="help--slides active">
+    <div class="help--slides active">
 
-            <p>Oto lista fundacji, które otrzymały od Ciebie pomoc</p>
+        <p>Oto lista fundacji, które otrzymały od Ciebie pomoc:</p>
 
-            <ul class="help--slides-items">
+        <ul class="help--slides-items">
+            <c:forEach items="${donations}" step="2" varStatus="outerLoop">
                 <li>
-                    <c:forEach items="${donations}" var="donation">
+                    <c:forEach items="${donations}" var="donation" begin="${outerLoop.index}" end="${outerLoop.index +1}">
                         <div class="col">
-                            <div class="title"><c:out value="${donation.INSTITUTION_NAME}"/></div>
-                            <div class="subtitle">Przekazanych worków: <c:out value="${donation.QUANTITY}"/></div>
+                            <div class="title">${donation.INSTITUTION_NAME}</div>
+                            <div class="subtitle">Przekazane rzeczy:
+                                <c:forEach items="${donation.CATEGORIES}" var="category" varStatus="categoryLoop">
+                                    ${category}<c:if test="${not categoryLoop.last}">, </c:if>
+                                </c:forEach>
+                            </div>
+                            <div class="subtitle">Iość worków: ${donation.QUANTITY}</div>
+                            <div class="subtitle">Data: ${donation.PICK_UP_DATE}</div>
                         </div>
+                        <c:if test="${outerLoop.last && donations.size()%2 != 0}">
+                            <%@include file="/WEB-INF/jspf/empty-li.jspf"%>
+                        </c:if>
                     </c:forEach>
                 </li>
-            </ul>
-        </div>
-<%--    <div class="help--slides-pagination">--%>
-<%--        <button type="button" class="btn prev-step">&#x3C;</button>--%>
-<%--        <button type="button" class="btn next-step">&#x3E;</button>--%>
-<%--    </div>--%>
+            </c:forEach>
+        </ul>
+    </div>
 </section>
 
 <footer>
