@@ -54,4 +54,19 @@ public class CharityUserService {
         return userRepository.getDonationsByUserId(email);
     }
 
+    public UserDTO getUserDTOByEmail(String email) {
+        CharityUser charityUser = userRepository.findFirstByEmail(email);
+        return new UserDTO(
+                charityUser.getId(),
+                charityUser.getFirstName(),
+                charityUser.getLastName(),
+                charityUser.getEmail(),
+                null
+        );
+    }
+
+    public CharityUser getUserByEmail(String email) {
+        return userRepository.findFirstByEmail(email);
+    }
+
 }

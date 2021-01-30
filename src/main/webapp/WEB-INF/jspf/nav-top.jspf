@@ -13,7 +13,7 @@
             <li class="logged-user">
                 Witaj <c:out value="${userFirstName}"/>
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/my-data">Profil</a></li>
                     <li><a href="${pageContext.request.contextPath}/user/my-donations">Moje zbiórki</a></li>
                     <li><a href="${pageContext.request.contextPath}/logout">Wyloguj</a></li>
                 </ul>
