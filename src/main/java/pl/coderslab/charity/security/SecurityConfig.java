@@ -83,5 +83,63 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+    @Configuration
+    @Order(2)
+    public static class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+        private final DataSource dataSource;
+        private final UserDetailsService userDetailsService;
+
+        public AdminConfigurationAdapter(DataSource dataSource, UserDetailsService userDetailsService) {
+            this.dataSource = dataSource;
+            this.userDetailsService = userDetailsService;
+        }
+
+        public PasswordEncoder encoder() {
+            return new BCryptPasswordEncoder();
+        }
+
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth
+                    .jdbcAuthentication()
+                    .dataSource(dataSource)
+                    .usersByUsernameQuery(
+                            "SELECT email, password, enabled FROM users WHERE email=?"
+                    )
+                    .authoritiesByUsernameQuery(
+                            "SELECT email, authority FROM authorities WHERE email=?"
+                    )
+                    .passwordEncoder(encoder())
+            ;
+            auth
+                    .userDetailsService(userDetailsService)
+                    .passwordEncoder(encoder());
+        }
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .antMatcher("/admin/**")
+                    .authorizeRequests()
+                    .anyRequest()
+                    .hasRole("ADMIN")
+
+
+                    .and()
+                    .formLogin()
+                    .loginPage("/adminLogin")
+                    .usernameParameter("email")
+                    .defaultSuccessUrl("/admin/dashboard")
+
+                    .and()
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                    .logoutSuccessUrl("/");
+        }
+
+    }
+
 
 }
