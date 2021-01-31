@@ -61,7 +61,7 @@ public class UserDetailsController {
         CharityUser charityUser = userDetailsService.updateUserDataWithUserDTO(user, getUserIdentifier(authentication));
         registrationService.encodePassword(charityUser);
         registrationService.saveUser(charityUser);
-        return "redirect:/";
+        return "user-details/data-confirmation";
     }
 
 
