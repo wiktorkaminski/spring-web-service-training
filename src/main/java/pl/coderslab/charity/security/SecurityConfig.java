@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             http
                     .authorizeRequests()
                     .antMatchers("/user/**")
-                    .hasRole("USER")
+                    .hasAnyRole("USER", "ADMIN")
                     .antMatchers("/", "/register/**")
                     .permitAll()
 
@@ -121,22 +121,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .antMatcher("/admin/**")
                     .authorizeRequests()
-                    .anyRequest()
+                    .antMatchers("/admin/**")
                     .hasRole("ADMIN")
-
 
                     .and()
                     .formLogin()
-                    .loginPage("/adminLogin")
+                    .loginPage("/admin/login")
+                    .permitAll()
+//                    .loginProcessingUrl("/admin_login")
                     .usernameParameter("email")
-                    .defaultSuccessUrl("/admin/dashboard")
+                    .defaultSuccessUrl("/admin/dashboard", true)
 
                     .and()
                     .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                    .logoutSuccessUrl("/");
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout", "GET"))
+                    .logoutSuccessUrl("/")
+
+                    .and()
+                    .csrf().disable();
         }
 
     }
