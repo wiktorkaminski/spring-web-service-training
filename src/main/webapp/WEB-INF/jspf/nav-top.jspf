@@ -27,7 +27,7 @@
         <li><a href="${pageContext.request.contextPath}/#about-us" class="btn btn--without-border">O nas</a></li>
         <li><a href="${pageContext.request.contextPath}/#supported-institutions" class="btn btn--without-border">Fundacje i organizacje</a></li>
         <c:if test="${not empty userFirstName}">
-            <li><a href="${pageContext.request.contextPath}/donations/form" class="btn btn--without-border">Przekaż dary</a></li>
+            <li><a href="${pageContext.request.contextPath}/user/donations/form" class="btn btn--without-border">Przekaż dary</a></li>
         </c:if>
         <li><a href="#contact-us" class="btn btn--without-border">Kontakt</a></li>
     </ul>

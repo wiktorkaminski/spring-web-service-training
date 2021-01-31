@@ -1,9 +1,8 @@
 package pl.coderslab.charity.security;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,53 +19,68 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private DataSource dataSource;
-    private UserDetailsService userDetailsService;
-
-    public SecurityConfig(DataSource dataSource, UserDetailsService userDetailsService) {
-        this.dataSource = dataSource;
-        this.userDetailsService = userDetailsService;
-    }
 
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "SELECT email, password, enabled FROM users WHERE email=?"
-                )
-                .authoritiesByUsernameQuery(
-                        "SELECT email, authority FROM authorities WHERE email=?"
-                )
-                .passwordEncoder(new BCryptPasswordEncoder())
-        ;
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(encoder());
+    @Configuration
+    @Order(1)
+    public static class UserConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
-    }
+        private final DataSource dataSource;
+        private final UserDetailsService userDetailsService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/donations/**", "/user/**")
-                .hasRole("USER")
-                .antMatchers("/", "/register/**")
-                .permitAll()
-                .and()
-                .formLogin().loginPage("/login")
-                .usernameParameter("email")
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                .logoutSuccessUrl("/");
+        public UserConfigurationAdapter(DataSource dataSource, UserDetailsService userDetailsService) {
+            this.dataSource = dataSource;
+            this.userDetailsService = userDetailsService;
+        }
+
+        public PasswordEncoder encoder() {
+            return new BCryptPasswordEncoder();
+        }
+
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth
+                    .jdbcAuthentication()
+                    .dataSource(dataSource)
+                    .usersByUsernameQuery(
+                            "SELECT email, password, enabled FROM users WHERE email=?"
+                    )
+                    .authoritiesByUsernameQuery(
+                            "SELECT email, authority FROM authorities WHERE email=?"
+                    )
+                    .passwordEncoder(encoder())
+            ;
+            auth
+                    .userDetailsService(userDetailsService)
+                    .passwordEncoder(encoder());
+        }
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .authorizeRequests()
+                    .antMatchers("/user/**")
+                    .hasRole("USER")
+                    .antMatchers("/", "/register/**")
+                    .permitAll()
+
+                    .and()
+                    .formLogin()
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .defaultSuccessUrl("/user/my-donations")
+
+                    .and()
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                    .logoutSuccessUrl("/");
+        }
+
     }
 
 

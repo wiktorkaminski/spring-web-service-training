@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import javax.validation.ValidationException;
 
 @Controller
-@RequestMapping("/donations")
+@RequestMapping("/user/donations")
 @RequiredArgsConstructor
 public class DonationController {
 
