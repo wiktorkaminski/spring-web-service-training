@@ -126,7 +126,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                DataTable Example
+                                Lista zarejestrowanych w systemie instytucji
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -135,6 +135,7 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Nazwa</th>
+                                                <th>Motto</th>
                                                 <th>Ilość donacji</th>
 
                                             </tr>
@@ -143,15 +144,20 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Nazwa</th>
+                                                <th>Motto</th>
                                                 <th>Ilość donacji</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
+                                        <c:forEach items="${institutions}" var="institution">
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
+                                                <td>${institution.id}</td>
+                                                <td>${institution.name}</td>
+                                                <td>${institution.description}</td>
+                                                <td>${institution.donations}</td>
                                             </tr>
+                                        </c:forEach>
+
                                         </tbody>
                                     </table>
                                 </div>
