@@ -8,6 +8,7 @@ import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,12 @@ public class InstitutionService {
             ));
         }
         return dtosList;
+    }
+
+    public InstitutionDTO getInstitutionDTOById(Long id) {
+        Institution institution = institutionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return this.convert(institution);
+
     }
 
 

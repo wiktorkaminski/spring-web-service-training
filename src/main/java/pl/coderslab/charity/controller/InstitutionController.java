@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.DTO.InstitutionDTO;
@@ -41,5 +42,12 @@ public class InstitutionController {
         Institution institution = institutionService.convert(institutionDTO);
         institutionService.save(institution);
         return "redirect:/admin/institutions/list";
+    }
+
+    @GetMapping("/details-{id}")
+    public String showDetails(@PathVariable Long id, Model model) {
+        InstitutionDTO institutionDTO = institutionService.getInstitutionDTOById(id);
+        model.addAttribute("institutionDTO", institutionDTO);
+        return "/admin/institution-details";
     }
 }
