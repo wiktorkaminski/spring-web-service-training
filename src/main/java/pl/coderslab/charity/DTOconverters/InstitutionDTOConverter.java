@@ -25,19 +25,19 @@ public class InstitutionDTOConverter {
     }
 
     public Institution toEntity(InstitutionDTO dto) {
-        Optional<Institution> optionalEntity = institutionRepository.findById(dto.getId());
-        if (optionalEntity.isPresent()) {
-            Institution entity = optionalEntity.get();
+        if (dto.getId() != null) {
+            Optional<Institution> optionalEntity = institutionRepository.findById(dto.getId());
+            Institution entity = optionalEntity.orElseThrow(EntityNotFoundException::new);
             entity.setName(dto.getName());
             entity.setDescription(dto.getDescription());
             return entity;
-        } else {
-            return new Institution(
-                    null,
+        }
+
+        return new Institution(
+                    dto.getId(),
                     dto.getName(),
                     dto.getDescription()
             );
-        }
     }
 
 }

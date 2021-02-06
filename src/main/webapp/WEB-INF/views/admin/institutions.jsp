@@ -120,7 +120,7 @@
                             <div class="card-body">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button">
-                                        <a class="small text-white stretched-link" href="${pageContext.request.contextPath}/admin/institutions/form">Nowa instytucja</a>
+                                        <a class="small text-white stretched-link" href="${pageContext.request.contextPath}/admin/institutions/form">Add institution</a>
                                     </button>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                Lista zarejestrowanych w systemie instytucji
+                                Registeres institutions
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -136,18 +136,18 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Nazwa</th>
-                                                <th>Motto</th>
-                                                <th>Ilość donacji</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th># donations</th>
 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Nazwa</th>
-                                                <th>Motto</th>
-                                                <th>Ilość donacji</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th># donations</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
