@@ -3,6 +3,7 @@ package pl.coderslab.charity.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.DTO.InstitutionDTO;
+import pl.coderslab.charity.DTOconverters.InstitutionDTOConverter;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
@@ -16,17 +17,30 @@ public class InstitutionService {
 
     private final InstitutionRepository institutionRepository;
     private final DonationRepository donationRepository;
+    private final InstitutionDTOConverter dtoConverter;
 
     public List<InstitutionDTO> getAllInstitutionDTOs() {
         List<Institution> allInstitutions = getAllInstitutions();
-        return convertInstitutionsToDTOs(allInstitutions);
+        return prepareInstitutionsDTOList(allInstitutions);
+    }
+
+    public Institution save(Institution institution) {
+        return institutionRepository.save(institution);
+    }
+
+    public Institution convert(InstitutionDTO institutionDTO) {
+        return dtoConverter.toEntity(institutionDTO);
+    }
+
+    public InstitutionDTO convert(Institution institution) {
+        return dtoConverter.toDTO(institution);
     }
 
     private List<Institution> getAllInstitutions() {
         return (List<Institution>) institutionRepository.findAll();
     }
 
-    private List<InstitutionDTO> convertInstitutionsToDTOs(List<Institution> list) {
+    private List<InstitutionDTO> prepareInstitutionsDTOList(List<Institution> list) {
         List<InstitutionDTO> dtosList = new ArrayList<>();
         for (Institution institution : list) {
             dtosList.add(new InstitutionDTO(
@@ -38,4 +52,6 @@ public class InstitutionService {
         }
         return dtosList;
     }
+
+
 }
