@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 

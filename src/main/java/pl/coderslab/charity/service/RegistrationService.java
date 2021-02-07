@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.DTO.UserDTO;
-import pl.coderslab.charity.entity.CharityUser;
 import pl.coderslab.charity.entity.Authority;
+import pl.coderslab.charity.entity.CharityUser;
 import pl.coderslab.charity.repository.AuthorityRepository;
 import pl.coderslab.charity.repository.UserRepository;
 

@@ -5,7 +5,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.CharityUser;
 import pl.coderslab.charity.entity.Donation;
@@ -16,7 +15,6 @@ import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.repository.UserRepository;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor

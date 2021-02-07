@@ -9,7 +9,6 @@ import pl.coderslab.charity.entity.CharityUser;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
