@@ -25,4 +25,6 @@ public class InstitutionDTO {
     private String description;
 
     private Long donations;
+
+    private boolean active;
 }

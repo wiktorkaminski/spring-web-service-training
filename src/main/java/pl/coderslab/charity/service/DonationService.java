@@ -27,8 +27,8 @@ public class DonationService {
     private final DonationRepository donationRepository;
     private final UserRepository userRepository;
 
-    public Iterable<Institution> findAllInstitutions() {
-        return institutionRepository.findAll();
+    public Iterable<Institution> findAllActiveInstitutions() {
+        return institutionRepository.findAllByActive(true);
     }
 
     public Iterable<Category> findAllCategories() {

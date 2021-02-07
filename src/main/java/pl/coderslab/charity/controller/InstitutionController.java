@@ -19,8 +19,14 @@ public class InstitutionController {
     private final InstitutionService institutionService;
 
     @GetMapping("/list")
-    public String list(Model model) {
-        model.addAttribute("institutions", institutionService.getAllInstitutionDTOs());
+    public String listOfActiveInstit(Model model) {
+        model.addAttribute("institutions", institutionService.getAllInstitutionDTOs(true));
+        return "admin/institutions";
+    }
+
+    @GetMapping("/list-deactivated")
+    public String listOfDeactivatedIntit(Model model) {
+        model.addAttribute("institutions", institutionService.getAllInstitutionDTOs(false));
         return "admin/institutions";
     }
 
@@ -49,14 +55,25 @@ public class InstitutionController {
     }
 
     @PostMapping("/update")
-    public String update(@RequestParam(defaultValue = "") String deactivate, InstitutionDTO institutionDTO) {
+    public String update(@RequestParam(defaultValue = "") String toggle, InstitutionDTO institutionDTO) {
 
-        if (!deactivate.equals("")) {
-            institutionService.deactivateById(institutionDTO.getId());
-        } else {
-            Institution institution = institutionService.convert(institutionDTO);
-            institutionService.save(institution);
+        if (toggle.equals("Activate/Show")) {
+            institutionService.toggleActivationById(institutionDTO.getId(), true);
+            return "redirect:/admin/institutions/list-deactivated";
         }
-        return "redirect:/admin/institutions/list";
+
+        if (toggle.equals("Deactivate/Hide")) {
+            institutionService.toggleActivationById(institutionDTO.getId(), false);
+            return "redirect:/admin/institutions/list";
+        }
+
+        Institution institution = institutionService.convert(institutionDTO);
+        institutionService.save(institution);
+
+        if (institutionDTO.isActive()) {
+            return "redirect:/admin/institutions/list";
+        } else return "redirect:/admin/institutions/list-deactivated";
+
+
     }
 }

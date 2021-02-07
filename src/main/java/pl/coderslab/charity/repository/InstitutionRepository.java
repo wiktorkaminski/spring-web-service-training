@@ -12,8 +12,8 @@ import java.util.List;
 public interface InstitutionRepository extends CrudRepository<Institution, Long> {
 
     @Modifying
-    @Query("UPDATE Institution i SET i.active=false WHERE i.id=?1")
-    void deactivateById(Long id);
+    @Query("UPDATE Institution i SET i.active=?2 WHERE i.id=?1")
+    void toggleActivationById(Long id, boolean active);
 
     List<Institution> findAllByActive(boolean active);
 

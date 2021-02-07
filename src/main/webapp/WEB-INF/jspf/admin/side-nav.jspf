@@ -17,8 +17,9 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/institutions/form">Add institution</a>
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/institutions/list">Active institutions</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/institutions/form">Add</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/institutions/list">List active</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/institutions/list-deactivated">List deactivated</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

@@ -21,8 +21,8 @@ public class InstitutionService {
     private final DonationRepository donationRepository;
     private final InstitutionDTOConverter dtoConverter;
 
-    public List<InstitutionDTO> getAllInstitutionDTOs() {
-        List<Institution> allInstitutions = getAllInstitutions();
+    public List<InstitutionDTO> getAllInstitutionDTOs(boolean showActive) {
+        List<Institution> allInstitutions = getAllInstitutions(showActive);
         return prepareInstitutionsDTOList(allInstitutions);
     }
 
@@ -31,8 +31,8 @@ public class InstitutionService {
     }
 
     @Transactional
-    public void deactivateById(Long id) {
-        institutionRepository.deactivateById(id);
+    public void toggleActivationById(Long id, boolean isActive) {
+        institutionRepository.toggleActivationById(id, isActive);
     }
 
     public Institution convert(InstitutionDTO institutionDTO) {
@@ -43,8 +43,8 @@ public class InstitutionService {
         return dtoConverter.toDTO(institution);
     }
 
-    private List<Institution> getAllInstitutions() {
-        return (List<Institution>) institutionRepository.findAllByActive(true);
+    private List<Institution> getAllInstitutions(boolean active) {
+        return (List<Institution>) institutionRepository.findAllByActive(active);
     }
     private List<InstitutionDTO> prepareInstitutionsDTOList(List<Institution> list) {
         List<InstitutionDTO> dtosList = new ArrayList<>();
@@ -53,7 +53,8 @@ public class InstitutionService {
                     institution.getId(),
                     institution.getName(),
                     institution.getDescription(),
-                    donationRepository.countAllByInstitutionId(institution.getId())
+                    donationRepository.countAllByInstitutionId(institution.getId()),
+                    institution.isActive()
             ));
         }
         return dtosList;

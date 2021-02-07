@@ -20,7 +20,8 @@ public class InstitutionDTOConverter {
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
-                null
+                null,
+                entity.isActive()
         );
     }
 
@@ -30,6 +31,7 @@ public class InstitutionDTOConverter {
             Institution entity = optionalEntity.orElseThrow(EntityNotFoundException::new);
             entity.setName(dto.getName());
             entity.setDescription(dto.getDescription());
+            entity.setActive(dto.isActive());
             return entity;
         }
 

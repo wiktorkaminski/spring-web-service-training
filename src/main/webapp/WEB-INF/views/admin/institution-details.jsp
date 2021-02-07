@@ -42,8 +42,10 @@
                                     </div>
                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <div class="justify-content-between">
-                                            <input class="btn btn-primary" type="submit" name="deactivate"
-                                                   value="Deactivate/Hide"/>
+                                            <input class="btn btn-primary" type="submit" name="toggle"
+                                                    <c:if test="${institutionDTO.active == true}">value="Deactivate/Hide"</c:if>
+                                                    <c:if test="${institutionDTO.active == false}">value="Activate/Show"</c:if>
+                                            />
                                             <input class="btn btn-primary" type="submit" name="update" value="Update"/>
                                         </div>
                                     </div>
