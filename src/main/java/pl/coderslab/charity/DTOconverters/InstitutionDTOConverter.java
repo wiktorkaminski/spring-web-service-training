@@ -36,7 +36,8 @@ public class InstitutionDTOConverter {
         return new Institution(
                     dto.getId(),
                     dto.getName(),
-                    dto.getDescription()
+                    dto.getDescription(),
+                true
             );
     }
 

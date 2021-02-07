@@ -9,6 +9,7 @@ import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class InstitutionService {
         return institutionRepository.save(institution);
     }
 
+    @Transactional
+    public void deactivateById(Long id) {
+        institutionRepository.deactivateById(id);
+    }
+
     public Institution convert(InstitutionDTO institutionDTO) {
         return dtoConverter.toEntity(institutionDTO);
     }
@@ -38,9 +44,8 @@ public class InstitutionService {
     }
 
     private List<Institution> getAllInstitutions() {
-        return (List<Institution>) institutionRepository.findAll();
+        return (List<Institution>) institutionRepository.findAllByActive(true);
     }
-
     private List<InstitutionDTO> prepareInstitutionsDTOList(List<Institution> list) {
         List<InstitutionDTO> dtosList = new ArrayList<>();
         for (Institution institution : list) {

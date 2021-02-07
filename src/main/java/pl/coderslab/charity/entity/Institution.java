@@ -22,4 +22,6 @@ public class Institution {
 
     String description;
 
+    boolean active;
+
 }

@@ -131,7 +131,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="description">Description</label>
-                                                <form:textarea class="form-control py-4" path="description" id="description" maxlength="255" rows="2"/>
+                                                <form:textarea class="form-control" path="description" id="description" maxlength="255" rows="2"/>
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <div class="input-group-append">

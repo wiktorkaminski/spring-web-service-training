@@ -119,25 +119,24 @@
                     </div>
 
                     <div class="container">
-                        <div class="row justify-content-center">
+                        <div class="row">
                             <div class="col-lg-5">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">New institution</h3></div>
+                                <div class="card border-0 rounded-lg mt-5">
                                     <div class="card-body">
-                                        <form:form modelAttribute="institutionDTO">
+                                        <form:form action="/admin/institutions/update" modelAttribute="institutionDTO" method="POST">
+                                            <form:hidden path="id"/>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="name">Name</label>
                                                 <form:input class="form-control py-4" path="name" id="name" type="text" maxlength="255" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="description">Description</label>
-                                                <form:textarea class="form-control py-4" path="description" id="description" maxlength="255" rows="2"/>
+                                                <form:textarea class="form-control" path="description" id="description" maxlength="255" rows="2"/>
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="submit">
-                                                        Add
-                                                    </button>
+                                                <div class="justify-content-between">
+                                                    <input class="btn btn-primary" type="submit" name="deactivate" value="Deactivate/Hide"/>
+                                                    <input class="btn btn-primary" type="submit" name="update" value="Update"/>
                                                 </div>
                                             </div>
                                         </form:form>

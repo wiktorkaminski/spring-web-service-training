@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.DTO.InstitutionDTO;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.service.InstitutionService;
@@ -49,5 +46,17 @@ public class InstitutionController {
         InstitutionDTO institutionDTO = institutionService.getInstitutionDTOById(id);
         model.addAttribute("institutionDTO", institutionDTO);
         return "/admin/institution-details";
+    }
+
+    @PostMapping("/update")
+    public String update(@RequestParam(defaultValue = "") String deactivate, InstitutionDTO institutionDTO) {
+
+        if (!deactivate.equals("")) {
+            institutionService.deactivateById(institutionDTO.getId());
+        } else {
+            Institution institution = institutionService.convert(institutionDTO);
+            institutionService.save(institution);
+        }
+        return "redirect:/admin/institutions/list";
     }
 }
