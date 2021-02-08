@@ -20,7 +20,7 @@ As a admin you can:
 - edit, deactivate and activate institutions, 
 New features are still in develop.
 
-## What did I skilled up during that project
+## What did I skill up during that project
 - Java 
 - Spring Boot, Spring Security, Spring Data, 
 - Hibernate, Hibernate Validator, 
