@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.DTO.UserDTO;
+import pl.coderslab.charity.DTOconverters.CharityUserDTOConverter;
 import pl.coderslab.charity.entity.CharityUser;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.repository.UserRepository;
@@ -17,29 +18,15 @@ import java.util.Optional;
 public class CharityUserService {
 
     private final UserRepository userRepository;
+    private final CharityUserDTOConverter userDTOConverter;
+
 
     public CharityUser dtoToEntity(UserDTO dto) {
-        CharityUser entity = new CharityUser();
-
-        entity.setId(dto.getId());
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
-        entity.setEmail(dto.getEmail());
-        entity.setPassword(dto.getPassword());
-
-        return entity;
+        return userDTOConverter.convert(dto);
     }
 
     public UserDTO entityToDto(CharityUser entity) {
-        UserDTO dto = new UserDTO();
-
-        dto.setId(entity.getId());
-        dto.setFirstName(entity.getFirstName());
-        dto.setLastName(entity.getLastName());
-        dto.setEmail(entity.getEmail());
-        dto.setPassword(entity.getPassword());
-
-        return dto;
+        return userDTOConverter.convert(entity);
     }
 
     public String getUserFirstName(Authentication authentication) {

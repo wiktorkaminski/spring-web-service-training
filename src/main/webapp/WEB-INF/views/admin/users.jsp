@@ -16,16 +16,17 @@
             <div class="container-fluid">
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a
-                            href="${pageContext.request.contextPath}/admin/institutions/dashboard">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Institutions</li>
+                            href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item">Users</li>
+                    <li class="breadcrumb-item active">${listType}s</li>
                 </ol>
-                <h1 class="mt-4">Users list</h1>
+                <h1 class="mt-4">List of ${listType}s</h1>
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <a class="small text-white stretched-link"
-                                   href="${pageContext.request.contextPath}/admin/institutions/form">Add institution</a>
+                                   href="${pageContext.request.contextPath}/admin/${listType}s/add">Add new ${listType}</a>
                             </button>
                         </div>
                     </div>
@@ -33,7 +34,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table mr-1"></i>
-                        Registered institutions
+                        Registered ${listType}s
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -44,7 +45,6 @@
                                     <th>First name</th>
                                     <th>Last name</th>
                                     <th>E-mail</th>
-                                    <th>Authorities</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -53,20 +53,23 @@
                                     <th>First name</th>
                                     <th>Last name</th>
                                     <th>E-mail</th>
-                                    <th>Authorities</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <c:forEach items="${institutions}" var="institution">
+                                <c:forEach items="${users}" var="user">
                                     <tr>
-                                        <td>${institution.id}</td>
+                                        <td>${user.id}</td>
                                         <td>
-                                            <a href="${pageContext.request.contextPath}/admin/institutions/details-${institution.id}">
-                                                    ${institution.name}
+                                            <a href="${pageContext.request.contextPath}/admin/${listType}s/details-${user.id}">
+                                                    ${user.firstName}
                                             </a>
                                         </td>
-                                        <td>${institution.description}</td>
-                                        <td>${institution.donations}</td>
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}/admin/${listType}s/details-${user.id}">
+                                                    ${user.lastName}
+                                            </a>
+                                        </td>
+                                        <td>${user.email}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
