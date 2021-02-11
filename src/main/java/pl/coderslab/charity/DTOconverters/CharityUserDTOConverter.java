@@ -1,6 +1,7 @@
 package pl.coderslab.charity.DTOconverters;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.coderslab.charity.DTO.UserDTO;
 import pl.coderslab.charity.entity.CharityUser;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class CharityUserDTOConverter {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public CharityUser convert(UserDTO dto) {
         CharityUser entity;
@@ -25,8 +27,9 @@ public class CharityUserDTOConverter {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
-        entity.setPassword(dto.getPassword());
-
+        if (dto.getPassword() != null) {
+            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
         return entity;
     }
 
@@ -37,7 +40,6 @@ public class CharityUserDTOConverter {
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setEmail(entity.getEmail());
-        dto.setPassword(entity.getPassword());
 
         return dto;
     }

@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
-                                <a class="small text-white stretched-link"
+                                <a class="text-white card-link"
                                    href="${pageContext.request.contextPath}/admin/institutions/form">Add institution</a>
                             </button>
                         </div>

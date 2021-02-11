@@ -25,8 +25,8 @@
                     <div class="card-body">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
-                                <a class="small text-white stretched-link"
-                                   href="${pageContext.request.contextPath}/admin/${listType}s/add">Add new ${listType}</a>
+                                <a class="text-white card-link"
+                                   href="${pageContext.request.contextPath}/admin/${listType}s/add">New ${listType}</a>
                             </button>
                         </div>
                     </div>

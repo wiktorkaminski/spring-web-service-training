@@ -27,29 +27,41 @@
                     <div class="col-lg-5">
                         <div class="card border-0 rounded-lg mt-5">
                             <div class="card-body">
-                                <form:form action="/admin/institutions/update" modelAttribute="institutionDTO"
+                                <form:form action="/admin/admins/update" modelAttribute="user"
                                            method="POST">
                                     <form:hidden path="id"/>
                                     <div class="form-group">
-                                        <label class="small mb-1" for="name">Name</label>
-                                        <form:input class="form-control py-4" path="name" id="name" type="text"
+                                        <label class="small mb-1" for="firstName">Name</label>
+                                        <form:input class="form-control py-4" path="firstName" id="firstName" type="text"
                                                     maxlength="255"/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="small mb-1" for="description">Description</label>
-                                        <form:textarea class="form-control" path="description" id="description"
-                                                       maxlength="255" rows="2"/>
+                                        <label class="small mb-1" for="lastName">Name</label>
+                                        <form:input class="form-control py-4" path="lastName" id="lastName" type="text"
+                                                    maxlength="255"/>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="email">Name</label>
+                                        <form:input class="form-control py-4" path="email" id="email" type="email"
+                                                    maxlength="255"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="password">Name</label>
+                                        <form:input class="form-control py-4" path="password" id="password" type="password"
+                                                    maxlength="255"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="password2">Name</label>
+                                        <input class="form-control py-4" id="password2" type="password"
+                                                    maxlength="255"/>
+                                    </div>
+
                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <div class="justify-content-between">
                                             <button class="btn btn-secondary" type="button">
-                                                <a class="text-white card-link"
-                                                   href="${pageContext.request.contextPath}/admin/institutions/list">Back</a>
+                                               <a class="text-white card-link"
+                                                   href="${pageContext.request.contextPath}/admin/${userType}s/list">Back</a>
                                             </button>
-                                            <input class="btn btn-primary" type="submit" name="toggle"
-                                                    <c:if test="${institutionDTO.active == true}">value="Deactivate/Hide"</c:if>
-                                                    <c:if test="${institutionDTO.active == false}">value="Activate/Show"</c:if>
-                                            />
                                             <input class="btn btn-primary" type="submit" name="update" value="Update"/>
                                         </div>
                                     </div>
