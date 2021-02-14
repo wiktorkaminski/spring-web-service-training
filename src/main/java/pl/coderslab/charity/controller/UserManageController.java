@@ -42,7 +42,7 @@ public class UserManageController {
     public String processForm(@ModelAttribute("userdto") @Valid UserDTO userdto, BindingResult bindingResult, @RequestParam String password2) {
         registrationService.trimFields(userdto);
 
-        if (registrationService.checkIfUserExists(userdto)) {
+        if (userdto.getId() == null && registrationService.checkIfUserExists(userdto)) {
             bindingResult.rejectValue("email", "error.userdto", "User with such e-mail exists.");
         }
 
@@ -50,7 +50,10 @@ public class UserManageController {
             bindingResult.rejectValue("password", "error.userdto", "Passwords do not match.");
         }
 
-        if (bindingResult.hasErrors()) return "admin/user-form";
+        if (bindingResult.hasErrors()) {
+            if (userdto.getId() == null) return "admin/user-form";
+            else return "admin/user-details";
+        };
 
         userManageService.saveAsEntity(userdto);
         return "redirect:/admin/admins/list";
@@ -59,7 +62,7 @@ public class UserManageController {
     @GetMapping("admins/details-{id}")
     public String showDetails(Model model, @PathVariable Long id) {
         UserDTO userDTObyId = userManageService.getUserDTObyId(id);
-        model.addAttribute("user", userDTObyId);
+        model.addAttribute("userdto", userDTObyId);
         model.addAttribute("userType", "admin");
         return "admin/user-details";
     }

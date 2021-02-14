@@ -27,18 +27,20 @@
                     <div class="col-lg-5">
                         <div class="card border-0 rounded-lg mt-5">
                             <div class="card-body">
-                                <form:form action="/admin/admins/update" modelAttribute="user"
+                                <form:form action="/admin/admins/form" modelAttribute="userdto"
                                            method="POST">
                                     <form:hidden path="id"/>
                                     <div class="form-group">
                                         <label class="small mb-1" for="firstName">Name</label>
                                         <form:input class="form-control py-4" path="firstName" id="firstName" type="text"
                                                     maxlength="255"/>
+                                        <form:errors path="firstName" cssClass="alert-danger"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="lastName">Last name</label>
                                         <form:input class="form-control py-4" path="lastName" id="lastName" type="text"
                                                     maxlength="255"/>
+                                        <form:errors path="lastName" cssClass="alert-danger"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="email">E-mail</label>
@@ -49,10 +51,11 @@
                                         <label class="small mb-1" for="password">Password</label>
                                         <form:input class="form-control py-4" path="password" id="password" type="password"
                                                     maxlength="255" placeholder="Type in new password"/>
+                                        <form:errors path="password" cssClass="alert-danger"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="password2">Repeat password</label>
-                                        <input class="form-control py-4" id="password2" type="password"
+                                        <input class="form-control py-4" id="password2" name="password2" type="password"
                                                     maxlength="255" placeholder="Retype password"/>
                                     </div>
 
