@@ -41,6 +41,10 @@ public class UserManageService {
         return userRepository.save(charityUser);
     }
 
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
     private CharityUser grantAdminAuth(CharityUser charityUser) {
         if (!authorityRepository.existsByEmailAndAuthority(charityUser.getEmail(), "ROLE_ADMIN")) {
             List<Authority> auth = (List<Authority>) charityUser.getAuthorities();

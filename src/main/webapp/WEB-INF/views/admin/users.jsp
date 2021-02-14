@@ -18,15 +18,15 @@
                     <li class="breadcrumb-item"><a
                             href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
                     <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">${listType}s</li>
+                    <li class="breadcrumb-item active">${userType}s</li>
                 </ol>
-                <h1 class="mt-4">List of ${listType}s</h1>
+                <h1 class="mt-4">List of ${userType.toLowerCase()}s</h1>
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <a class="text-white card-link"
-                                   href="${pageContext.request.contextPath}/admin/${listType}s/form">New ${listType}</a>
+                                   href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/form">New ${userType.toLowerCase()}</a>
                             </button>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table mr-1"></i>
-                        Registered ${listType}s
+                        Registered ${userType.toLowerCase()}s
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -60,12 +60,12 @@
                                     <tr>
                                         <td>${user.id}</td>
                                         <td>
-                                            <a href="${pageContext.request.contextPath}/admin/${listType}s/details-${user.id}">
+                                            <a href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/details-${user.id}">
                                                     ${user.firstName}
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="${pageContext.request.contextPath}/admin/${listType}s/details-${user.id}">
+                                            <a href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/details-${user.id}">
                                                     ${user.lastName}
                                             </a>
                                         </td>

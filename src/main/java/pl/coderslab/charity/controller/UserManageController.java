@@ -6,9 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.DTO.UserDTO;
-import pl.coderslab.charity.entity.CharityUser;
-import pl.coderslab.charity.repository.UserRepository;
-import pl.coderslab.charity.service.CharityUserService;
 import pl.coderslab.charity.service.RegistrationService;
 import pl.coderslab.charity.service.UserManageService;
 
@@ -23,23 +20,30 @@ public class UserManageController {
     private final UserManageService userManageService;
     private final RegistrationService registrationService;
 
+//    @RequestMapping("/admins")
+    @ModelAttribute
+    public void addAtributes(Model model) {
+        model.addAttribute("userType", "Admin");
+    }
+
     @GetMapping("admins/list")
     public String listAllAdmins(Model model) {
         List<UserDTO> adminList = userManageService.getAllUserDTOsByAuthority("ROLE_USER");
         model.addAttribute("users", adminList);
-        model.addAttribute("listType", "admin");
         return "admin/users";
     }
 
     @GetMapping("admins/form")
     public String form(Model model) {
-        model.addAttribute("userType", "admin");
         model.addAttribute("userdto", new UserDTO());
         return "admin/user-form";
     }
 
     @PostMapping("admins/form")
-    public String processForm(@ModelAttribute("userdto") @Valid UserDTO userdto, BindingResult bindingResult, @RequestParam String password2) {
+    public String processForm(Model model, @ModelAttribute("userdto") @Valid UserDTO userdto, BindingResult bindingResult, @RequestParam String password2, @RequestParam(defaultValue = "") String delete) {
+
+        if (delete.equals("Delete")) return "admin/user-delete-confirmation";
+
         registrationService.trimFields(userdto);
 
         if (userdto.getId() == null && registrationService.checkIfUserExists(userdto)) {
@@ -63,16 +67,14 @@ public class UserManageController {
     public String showDetails(Model model, @PathVariable Long id) {
         UserDTO userDTObyId = userManageService.getUserDTObyId(id);
         model.addAttribute("userdto", userDTObyId);
-        model.addAttribute("userType", "admin");
         return "admin/user-details";
     }
 
+    @PostMapping("/admins/delete")
+    public String deleteRequest(@RequestParam Long id) {
+        // TODO: prevent to delete logged user
+        userManageService.delete(id);
+        return "redirect:/admin/admins/list";
+    }
 
-//    @GetMapping("users/list")
-//    public String listAllUsers(Model model) {
-//        List<CharityUser> adminList = userRepository.getAllByAuthoritiesContaining("ROLE_USER");
-//        model.addAttribute("users", adminList);
-//        model.addAttribute("listType", "user");
-//        return "admin/users";
-//    }
 }

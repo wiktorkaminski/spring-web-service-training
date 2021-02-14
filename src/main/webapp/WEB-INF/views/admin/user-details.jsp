@@ -16,8 +16,10 @@
         <main>
             <div class="container-fluid">
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/${userType}s/list">${userType}s</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/list">${userType}s</a></li>
                     <li class="breadcrumb-item active">Details</li>
                 </ol>
             </div>
@@ -32,7 +34,8 @@
                                     <form:hidden path="id"/>
                                     <div class="form-group">
                                         <label class="small mb-1" for="firstName">Name</label>
-                                        <form:input class="form-control py-4" path="firstName" id="firstName" type="text"
+                                        <form:input class="form-control py-4" path="firstName" id="firstName"
+                                                    type="text"
                                                     maxlength="255"/>
                                         <form:errors path="firstName" cssClass="alert-danger"/>
                                     </div>
@@ -49,23 +52,25 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="password">Password</label>
-                                        <form:input class="form-control py-4" path="password" id="password" type="password"
+                                        <form:input class="form-control py-4" path="password" id="password"
+                                                    type="password"
                                                     maxlength="255" placeholder="Type in new password"/>
                                         <form:errors path="password" cssClass="alert-danger"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="password2">Repeat password</label>
                                         <input class="form-control py-4" id="password2" name="password2" type="password"
-                                                    maxlength="255" placeholder="Retype password"/>
+                                               maxlength="255" placeholder="Retype password"/>
                                     </div>
 
                                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <div class="justify-content-between">
                                             <button class="btn btn-secondary" type="button">
-                                               <a class="text-white card-link"
-                                                   href="${pageContext.request.contextPath}/admin/${userType}s/list">Back</a>
+                                                <a class="text-white card-link"
+                                                   href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/list">Back</a>
                                             </button>
                                             <input class="btn btn-primary" type="submit" name="update" value="Update"/>
+                                            <input class="btn btn-danger" type="submit" name="delete" value="Delete"/>
                                         </div>
                                     </div>
                                 </form:form>

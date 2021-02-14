@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/${userType}s/list">${userType}s</a></li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/list">${userType}s</a></li>
                     <li class="breadcrumb-item active">add new admin</li>
                 </ol>
             </div>
@@ -64,7 +64,7 @@
                                         <div class="justify-content-between">
                                             <button class="btn btn-secondary" type="button">
                                                <a class="text-white card-link"
-                                                   href="${pageContext.request.contextPath}/admin/${userType}s/list">Back</a>
+                                                   href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/list">Back</a>
                                             </button>
                                             <input class="btn btn-primary" type="submit" value="Add"/>
                                         </div>
