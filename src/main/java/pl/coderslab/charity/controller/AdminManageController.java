@@ -14,8 +14,8 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin")
-public class UserManageController {
+@RequestMapping("/admin/admins")
+public class AdminManageController {
 
     private final UserManageService userManageService;
     private final RegistrationService registrationService;
@@ -26,20 +26,20 @@ public class UserManageController {
         model.addAttribute("userType", "Admin");
     }
 
-    @GetMapping("admins/list")
+    @GetMapping("/list")
     public String listAllAdmins(Model model) {
         List<UserDTO> adminList = userManageService.getAllUserDTOsByAuthority("ROLE_USER");
         model.addAttribute("users", adminList);
         return "admin/users";
     }
 
-    @GetMapping("admins/form")
+    @GetMapping("/form")
     public String form(Model model) {
         model.addAttribute("userdto", new UserDTO());
         return "admin/user-form";
     }
 
-    @PostMapping("admins/form")
+    @PostMapping("/form")
     public String processForm(Model model, @ModelAttribute("userdto") @Valid UserDTO userdto, BindingResult bindingResult, @RequestParam String password2, @RequestParam(defaultValue = "") String delete) {
 
         if (delete.equals("Delete")) return "admin/user-delete-confirmation";
@@ -63,14 +63,14 @@ public class UserManageController {
         return "redirect:/admin/admins/list";
     }
 
-    @GetMapping("admins/details-{id}")
+    @GetMapping("/details-{id}")
     public String showDetails(Model model, @PathVariable Long id) {
         UserDTO userDTObyId = userManageService.getUserDTObyId(id);
         model.addAttribute("userdto", userDTObyId);
         return "admin/user-details";
     }
 
-    @PostMapping("/admins/delete")
+    @PostMapping("/delete")
     public String deleteRequest(@RequestParam Long id) {
         // TODO: prevent to delete logged user
         userManageService.delete(id);
