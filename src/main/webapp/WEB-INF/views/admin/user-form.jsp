@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <head>
-    <title>Details - Charity Admin</title>
+    <title>New Admin - Charity Admin</title>
     <%@include file="/WEB-INF/jspf/admin/head.jspf" %>
 </head>
 <body class="sb-nav-fixed">
@@ -18,7 +18,7 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/${userType}s/list">${userType}s</a></li>
-                    <li class="breadcrumb-item active">Details</li>
+                    <li class="breadcrumb-item active">add new admin</li>
                 </ol>
             </div>
 
@@ -27,32 +27,36 @@
                     <div class="col-lg-5">
                         <div class="card border-0 rounded-lg mt-5">
                             <div class="card-body">
-                                <form:form action="/admin/admins/update" modelAttribute="user"
+                                <form:form action="/admin/admins/form" modelAttribute="userdto"
                                            method="POST">
-                                    <form:hidden path="id"/>
                                     <div class="form-group">
                                         <label class="small mb-1" for="firstName">Name</label>
                                         <form:input class="form-control py-4" path="firstName" id="firstName" type="text"
                                                     maxlength="255"/>
+                                        <form:errors path="firstName" cssClass="alert-danger"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="lastName">Last name</label>
                                         <form:input class="form-control py-4" path="lastName" id="lastName" type="text"
                                                     maxlength="255"/>
+                                        <form:errors path="lastName" cssClass="alert-danger"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="email">E-mail</label>
                                         <form:input class="form-control py-4" path="email" id="email" type="email"
-                                                    maxlength="255" readonly="true"/>
+                                                    maxlength="255"/>
+                                        <form:errors path="email" cssClass="alert-danger"/>
+
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="password">Password</label>
                                         <form:input class="form-control py-4" path="password" id="password" type="password"
                                                     maxlength="255" placeholder="Type in new password"/>
+                                        <form:errors path="password" cssClass="alert-danger"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="small mb-1" for="password2">Repeat password</label>
-                                        <input class="form-control py-4" id="password2" type="password"
+                                        <input class="form-control py-4" id="password2" name="password2" type="password"
                                                     maxlength="255" placeholder="Retype password"/>
                                     </div>
 
@@ -62,7 +66,7 @@
                                                <a class="text-white card-link"
                                                    href="${pageContext.request.contextPath}/admin/${userType}s/list">Back</a>
                                             </button>
-                                            <input class="btn btn-primary" type="submit" name="update" value="Update"/>
+                                            <input class="btn btn-primary" type="submit" value="Add"/>
                                         </div>
                                     </div>
                                 </form:form>

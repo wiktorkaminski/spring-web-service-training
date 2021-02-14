@@ -38,7 +38,7 @@ public class CharityUser implements UserDetails {
 
     boolean enabled = true;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     Collection<Authority> authorities;
 
     @Override

@@ -4,13 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.DTO.UserDTO;
 import pl.coderslab.charity.DTOconverters.CharityUserDTOConverter;
+import pl.coderslab.charity.entity.Authority;
 import pl.coderslab.charity.entity.CharityUser;
 import pl.coderslab.charity.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +32,21 @@ public class UserManageService {
         CharityUser userEntity = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return userDTOConverter.convert(userEntity);
     }
+
+    public CharityUser saveAsEntity(UserDTO userDTO) {
+        CharityUser charityUser = userDTOConverter.convert(userDTO);
+        grantAdminAuth(charityUser);
+        return userRepository.save(charityUser);
+    }
+
+    private CharityUser grantAdminAuth(CharityUser charityUser) {
+        List<Authority> auth = (List<Authority>) charityUser.getAuthorities();
+        if (auth == null) auth = new ArrayList<>();
+        Authority a = new Authority(null, charityUser.getEmail(), "ROLE_ADMIN");
+        auth.add(a);
+        charityUser.setAuthorities(auth);
+        return charityUser;
+    }
+
 
 }

@@ -26,7 +26,7 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <a class="text-white card-link"
-                                   href="${pageContext.request.contextPath}/admin/${listType}s/add">New ${listType}</a>
+                                   href="${pageContext.request.contextPath}/admin/${listType}s/form">New ${listType}</a>
                             </button>
                         </div>
                     </div>
