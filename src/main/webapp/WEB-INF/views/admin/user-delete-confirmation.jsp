@@ -16,11 +16,15 @@
         <main>
             <div class="container-fluid">
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a
-                            href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a
-                            href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/list">${userType}s</a></li>
-                    <li class="breadcrumb-item active">Details</li>
+                    <li class="breadcrumb-item">
+                        <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">Users</li>
+                    <li class="breadcrumb-item">
+                        <a href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/list">${userType}s</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/details-${userdto.id}">Details</a></li>
+                    <li class="breadcrumb-item active">Delete confirmation</li>
                 </ol>
             </div>
 

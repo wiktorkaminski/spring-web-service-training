@@ -18,6 +18,7 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a
                             href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item">Users</li>
                     <li class="breadcrumb-item"><a
                             href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/list">${userType}s</a></li>
                     <li class="breadcrumb-item active">Details</li>

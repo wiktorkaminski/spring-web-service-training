@@ -15,10 +15,12 @@
         <main>
             <div class="container-fluid">
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a
-                            href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
+                    </li>
                     <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">${userType}s</li>
+                    <li class="breadcrumb-item">Admins</li>
+                    <li class="breadcrumb-item active">List</li>
                 </ol>
                 <h1 class="mt-4">List of ${userType.toLowerCase()}s</h1>
                 <div class="card mb-4">
