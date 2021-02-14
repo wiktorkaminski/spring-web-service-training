@@ -26,7 +26,8 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <a class="text-white card-link"
-                                   href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/form">New ${userType.toLowerCase()}</a>
+                                   href="${pageContext.request.contextPath}/admin/${userType.toLowerCase()}s/form">New ${userType.toLowerCase()}
+                                </a>
                             </button>
                         </div>
                     </div>
