@@ -18,7 +18,7 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">AdminLogin</h3></div>
                                     <div class="card-body">
-                                        <form method="POST" id="loginForm">
+                                        <form method="POST">
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="email">Email</label>

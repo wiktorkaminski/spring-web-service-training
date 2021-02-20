@@ -15,7 +15,7 @@
 
     <section class="login-page">
       <h2>Zaloguj się</h2>
-      <form method="POST" id="loginForm">
+      <form method="POST">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-group">
           <input type="email" name="email" id="email" placeholder="Email" />
