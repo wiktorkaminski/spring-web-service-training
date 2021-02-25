@@ -17,7 +17,10 @@ INSERT INTO categories (id, name) VALUES (3, 'Agd małe');
 INSERT INTO categories (id, name) VALUES (4, 'Elektronika');
 
 INSERT INTO users (id, email, enabled, first_name, last_name, password) VALUES (2, 'wiktor.kaminski@mixbox.pl', true, 'Wiktor', 'Kamiński', '$2a$10$xU5OYYsh3Z5KJ.lpZ65Zeu5jNOgX.KeWWnKhM812jk5oSwN03HQqW');
+INSERT INTO users (id, email, enabled, first_name, last_name, password) VALUES (3, 'art@art.pl', true, 'Aaa', 'Kkkk', '$2y$04$DcLRcsO0g98tmmt/0NcdweqRpZHpRTKZvcpKiZONx71OwhW90loUS ');
 
 INSERT INTO authorities (id, authority, email) VALUES (1, 'ROLE_USER', 'wiktor.kaminski@mixbox.pl');
+INSERT INTO authorities (id, authority, email) VALUES (2, 'ROLE_ADMIN', 'art@art.pl');
 
 INSERT INTO users_authorities (charity_user_id, authorities_id) VALUES (2, 1);
+INSERT INTO users_authorities (charity_user_id, authorities_id) VALUES (3, 2);

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailsService {
+public class CharityUserDetailsService {
 
     private final CharityUserService charityUserService;
     private final DonationDTOConverter donationDTOConverter;

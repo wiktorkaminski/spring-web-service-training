@@ -38,7 +38,7 @@ public class CharityUser implements UserDetails {
 
     boolean enabled = true;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     Collection<Authority> authorities;
 
     @Override

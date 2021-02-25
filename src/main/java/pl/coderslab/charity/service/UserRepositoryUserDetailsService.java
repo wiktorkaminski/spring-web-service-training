@@ -13,7 +13,7 @@ import pl.coderslab.charity.repository.UserRepository;
 @Primary
 @RequiredArgsConstructor
 public class UserRepositoryUserDetailsService implements UserDetailsService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

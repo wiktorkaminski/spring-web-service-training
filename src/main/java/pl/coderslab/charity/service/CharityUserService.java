@@ -44,7 +44,7 @@ public class CharityUserService {
     }
 
     public String getUserFirstName(Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
+        CharityUser principal = (CharityUser) authentication.getPrincipal();
         String email = principal.getUsername();
         Optional<String> userFirstName = userRepository.findUserFirstNameByEmail(email);
         return userFirstName.orElse(null);

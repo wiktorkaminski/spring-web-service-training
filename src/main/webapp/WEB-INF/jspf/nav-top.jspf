@@ -4,7 +4,7 @@
 <nav class="container container--70">
    <c:if test="${empty userFirstName}">
        <ul class="nav--actions">
-           <li><a href="${pageContext.request.contextPath}/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
+           <li><a href="${pageContext.request.contextPath}/user/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
            <li><a href="${pageContext.request.contextPath}/register/form" class="btn btn--small btn--highlighted">Załóż konto</a></li>
        </ul>
    </c:if>
@@ -15,7 +15,7 @@
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/user/my-data">Profil</a></li>
                     <li><a href="${pageContext.request.contextPath}/user/my-donations">Moje zbiórki</a></li>
-                    <li><a href="${pageContext.request.contextPath}/logout">Wyloguj</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/logout">Wyloguj</a></li>
                 </ul>
             </li>
         </ul>
